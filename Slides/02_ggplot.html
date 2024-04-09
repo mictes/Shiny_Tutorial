@@ -33,7 +33,7 @@
 		<div class="reveal">
 			<div class="slides">
 
-				<section class="title">
+				<section class="title" data-menu-title="ggplot2 recap">
 					<h1 class="shiny">Interactive Data Visualization with R Shiny for Life Sciences</h1>
 					<h2>Day 1: ggplot2 recap</h2>
 					<strong>Michael Teske &amp; Jonas Schmid, Zurich 08 April 2024</strong>
@@ -228,7 +228,7 @@ ggplot(data, aes(x=<span class="highlight">Petal.Length</span> y=<span class="hi
 					</div>
 				</section>
 
-				<section data-auto-animate>
+				<section data-auto-animate data-menu-title="Violin plot">
 					<h2>Let's create a plot!</h2>
 					<div class="panel" style="width: 45%;">
 						<img src="materials/images/Iris_violin_point.png" alt="Iris_ViolinPlot" data-id="Iris_plot" width="600">
@@ -274,7 +274,7 @@ ggplot(data, aes(x=<span class="highlight">Petal.Length</span> y=<span class="hi
 					</div>
 				</section>
 
-				<section data-auto-animate>
+				<section data-auto-animate data-menu-title="Volcano plot">
 					<h2>Let's create a plot! - Variant 2</h2>
 					<div class="panel" style="width: 45%;">
 						<img src="materials/images/Ruhland2016_volcano.png" alt="Ruhland2016_VolcanoPlot" data-id="Ruhland2016_plot" width="700">
@@ -321,7 +321,7 @@ ggplot(data, aes(x=<span class="highlight">Petal.Length</span> y=<span class="hi
 					<h2>Questions?</h2>
 				</section>
 
-				<section>
+				<section data-menu-title="Exercise 2">
 					<h2 class="highlight">Exercise 2</h2>
 					<p><strong>Task:</strong> Create a plot with ggplot2!</p>
 					<div class="panel" style="width: 25%;">
@@ -358,7 +358,7 @@ ggplot(data, aes(x=<span class="highlight">Petal.Length</span> y=<span class="hi
 									# Load data
 									ruhland2016 &lt;- read.csv('Ruhland2016.csv', row.names=1)
 
-									# Mark differentially expressed genes - HINT: Wrap this part in a reactive({})!
+									# Mark differentially expressed genes - Wrap this part in a reactive({})
 									log2FCthreshold &lt;- log2(1.5)
 									p_threshold     &lt;- 0.05
 
