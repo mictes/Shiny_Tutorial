@@ -1,0 +1,70 @@
+/*
+Date: 06.IV.2024
+Author: mictes
+Adapted from arta theme by pumbur and material code VS theme by rakibdev
+*/
+
+.hljs {
+  background: #12181E; /* #191d23 */
+  color: #aaa;
+}
+
+.hljs-subst {
+  color: #aaa;
+}
+
+.hljs-section {
+  color: #fff;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-meta {
+  color: #555; /* #555 */
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-regexp {
+  color: #00cc66;
+}
+
+.hljs-number,
+.hljs-addition {
+  color: #ffcc33;
+}
+
+.hljs-built_in,
+.hljs-literal,
+.hljs-type,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-link {
+  color: #32aaee;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #E933D2; /* #d45be2 */
+}
+
+.hljs-title,
+.hljs-variable,
+.hljs-deletion,
+.hljs-template-tag {
+  color: #bb1166;
+}
+
+.hljs-section,
+.hljs-doctag,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}

@@ -1,0 +1,1256 @@
+<!doctype html>
+<html lang="en">
+<!--
+	mictes
+	2024-04-06
+
+	https://github.com/mictes
+
+	R Shiny tutorial for MLS PhD Program
+	University of Zurich
+-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>R Shiny :: Introduction</title>
+
+		<link rel="stylesheet" href="scripts/revealjs/dist/reset.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/reveal.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="scripts/reveal-highlight/arta_adj.css">
+
+		<!-- 3rd party libraries -->
+		<link rel="stylesheet" href="scripts/reveal-poll/poll/poll_adj.css">
+		<link rel="stylesheet" href="scripts/reveal-pointer/pointer.css">
+		<link rel="stylesheet" href="scripts/reveal-menu/menu.css">
+
+		<!-- custom styles -->
+		<link rel="stylesheet" href="styles/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="title" data-menu-title="Introduction">
+					<h1 class="shiny">Interactive Data Visualization with R Shiny for Life Sciences</h1>
+					<h2>Day 1: Introduction</h2>
+					<strong>Michael Teske &amp; Jonas Schmid, Zurich 08 April 2024</strong>
+				</section>
+
+				<section>
+					<h2>What is R Shiny?</h2>
+					<img src="materials/images/shiny_logo_text.png" alt="shiny_logo_text">
+					<div class="fragment">
+						<p>Shiny is an R package that makes it easy to build interactive web applications (apps) straight from R.</p>
+						<q>Easy web apps for data science without the compromises</q><br>
+						<a href="https://shiny.posit.co/" target="_blank">https://shiny.posit.co/</a>
+					</div>
+				</section>
+
+				<section data-background-iframe="https://gallery.shinyapps.io/050-kmeans-example/" data-background-interactive data-menu-title="Examples">
+					<div class="floatingbox">
+						<h2>Examples</h2>
+						<p>Example 1 - from Shiny Gallery</p>
+						<a href="https://shiny.posit.co/r/gallery/" target="_blank">https://shiny.posit.co/r/gallery/</a>
+					</div>
+				</section>
+
+				<section data-background-iframe="https://marionilab.cruk.cam.ac.uk/MouseGastrulation2018" data-background-interactive>
+					<div class="floatingbox">
+						<h2>Examples</h2>
+						<p>Example 2 - Mouse Gastrulation Atlas</p>
+						<a href="https://marionilab.cruk.cam.ac.uk/" target="_blank">https://marionilab.cruk.cam.ac.uk/</a>
+					</div>
+				</section>
+
+				<section data-background-iframe="https://mictes.shinyapps.io/tutorial/" data-background-interactive>
+					<div class="floatingbox">
+						<h2>What we will create</h2>
+						<p>Something similar to this - different flavors possible, depending on your needs!</p>
+					</div>
+				</section>
+
+				<section data-background-image="materials/images/icecream_compressed.png" data-background-size="40%" data-background-position="75% center" data-menu-title="Schedule">
+					<h2>Schedule</h2>
+					<div class="card">
+						<h3>Day 1</h3>
+						<ul>
+							<li>Introduction to R Shiny, your first app</li>
+							<li>Quick review of ggplot2</li>
+							<li>Exploring Widgets</li>
+							<li>Creating a dashboard</li>
+						</ul>
+
+						<h3>Day 2</h3>
+						<ul>
+							<li>Implementing interactive plot functions</li>
+							<li>Advanced R Shiny customization</li>
+							<li>Deploying Shiny apps</li>
+						</ul>
+
+						<h3>Assignment</h3>
+						<div>
+							<strong>Mini-project</strong>: further customisation of the app with advanced elements and functions 
+							(completion of milestones, group work possible) - Workload: ca. 20 h
+						</div>
+					</div>
+				</section>
+
+				<section data-menu-title="Requirements">
+					<h2>Requirements</h2>
+					<img class="fragment visible" src="materials/images/Zenith_supersPORT_compressed.png" alt="Laptop" height="250">
+					<img class="fragment" src="materials/images/eduroamneg_trans_450pix.png" alt="Internet access" height="150">
+					<img class="fragment" src="materials/images/RStudio_logo_flat.svg" alt="R Studio" height="200">
+					<img class="fragment" src="materials/images/Shiny_logo.png" alt="Shiny" height="200">
+					<img class="fragment" src="materials/images/logo_slack.png" alt="Slack" height="125" style="margin: 2rem;">
+					<div class="codeblock fragment">
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers="1">
+								install.packages("shiny")
+								install.packages("tidyverse")
+							</code>
+						</pre>
+					</div>
+					<br>
+					<div class="codeblock fragment custom blur">
+						<strong>Test</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								library(shiny)
+								runExample("01_hello")
+							</code>
+						</pre>
+					</div>
+				</section>
+				<aside class="footnotes">
+					<p>
+						adapted from <a href="https://www.flickr.com/photos/davidepalermo93/8697874457/" target="_blank">https://www.flickr.com/photos/davidepalermo93/8697874457/</a> Davide <a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>, &nbsp;
+						<a href="https://www.eduroam.nl" target="_blank">eduroam</a>, &nbsp;
+						<a href="https://posit.co/products/open-source/rstudio/" target="_blank">Posit R Studio</a>, &nbsp;
+						<a href="https://shiny.posit.co/" target="_blank">posit Shiny</a>, &nbsp;
+						<a href="https://slack.com/media-kit/" target="_blank">Slack.com</a>
+					</p>
+				</aside>
+
+				<section data-transition="zoom-out" data-transition-speed="slow-out" data-menu-title="Anatomy of R Shiny">
+					<h2>Anatomy of R Shiny</h2>
+						<q>A Shiny app is a web page <strong class="highlight">(ui)</strong> connected to a computer running a live R session <strong class="highlight">(server)</strong>.</q> <br>
+						<br>
+						<img src="materials/images/example_k_means.png" alt="ui" height="360">
+						<img src="materials/images/double_arrow.svg" alt="ui" height="120" style="margin: 0 2rem 0 4rem">
+						<img src="materials/images/notebook_r_studio.png" alt="ui" height="360"> <br>
+						<br>
+						<q>Users can manipulate the UI, which will cause the server to update the UI's displays (by running R code).</q>
+				</section>
+				<aside class="footnotes">
+					<p>
+						adapted from <a href="https://github.com/rstudio/cheatsheets/blob/main/shiny.pdf" target="_blank">https://github.com/rstudio/cheatsheets/blob/main/shiny.pdf</a> Posit Software, PBC <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+					</p>
+				</aside>
+
+				<section data-transition="zoom-in" data-menu-title="User Interface: Layouts">
+					<h2>UI: Layouts</h2>
+					<div class="fragment panel">
+						<h3>fluidPage</h3>
+						<p>(default)</p>
+						<img src="materials/images/example_k_means.png" alt="fluidPage" height="250">
+						<div class="codeblock">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|2|3|4-5|">
+									ui &lt;- fluidPage(
+										titlePanel("Hello Shiny!"),
+										sidebarLayout(
+											sidebarPanel(…),
+											mainPanel(…)
+										)
+									)
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="fragment panel">
+						<h3>shinyDashboard</h3>
+						<p>&nbsp;</p>
+						<img src="materials/images/example_shinyDashboard.png" alt="shinyDashboard" height="250">
+						<div class="codeblock">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									library(shinydashboard)
+
+									ui &lt;- dashboardPage(
+										dashboardHeader(),
+										dashboardSidebar(),
+										dashboardBody(
+											fluidRow(
+												box(…)
+											)
+										)
+									)
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="fragment panel">
+						<h3>bslib</h3>
+						<p>(new generation)</p>
+						<img src="materials/images/example_bslib.png" alt="bslib" height="250">
+						<div class="codeblock">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									library(bslib)
+
+									ui &lt;- page_sidebar(
+										title   = "title panel",
+										sidebar = sidebar(…),
+										card(… ) # main content
+									)
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="fragment panel"><p>...</p></div>
+				</section>
+
+				<section data-background-iframe="https://gallery.shinyapps.io/081-widgets-gallery/" data-background-interactive data-menu-title="UI: Widgets, input">
+					<div class="floatingbox">
+						<h2>User Interface: Widgets</h2>
+						<a href="https://gallery.shinyapps.io/081-widgets-gallery/">https://shiny.posit.co/r/gallery/widgets/widget-gallery/</a>
+					</div>
+				</section>
+
+				<section>
+					<h2>The User interface provides input to the server</h2>
+					<div class="panel" style="width: 30%;">
+						<div class="codeblock">
+							<strong>Ui</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									sliderInput(
+										inputId = "bins",
+										label   = "Number of bins:",
+										min     = 1,
+										max     = 50,
+										value   = 30
+									)
+								</code>
+							</pre>
+						</div>
+						<div class="fragment">
+							<p style="font-size: 4rem;">⬇</p>
+							<div class="codeblock">
+								<strong>Server</strong>
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers data-ln-start-from="8">
+										input$bins
+									</code>
+								</pre>
+							</div>
+						</div>
+					</div>
+					<div class="panel" style="padding: 5px">
+						<div class="fragment">
+							<img src="materials/images/example_slider_15.jpg" alt="Slider_15_bins" width="450"> → <div class="codeblock inline" style="width: 400px;"><pre class="r"><code>print(input$bins) # 15</code></pre></div>
+						</div>
+						<div class="fragment">
+							<img src="materials/images/example_slider_30.jpg" alt="Slider_30_bins" width="450"> → <div class="codeblock inline" style="width: 400px;"><pre class="r"><code>print(input$bins) # 30</code></pre></div>
+						</div>
+					</div>
+				</section>
+
+				<section data-menu-title="Server: output">
+					<h2>The server updates the output</h2>
+					<div class="panel" style="width: 35%;">
+						<div class="hidden">
+							<div class="codeblock">
+								<strong>Ui</strong>
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers>
+										mainPanel(
+											plotOutput(outputId = "distPlot")
+										)
+									</code>
+								</pre>
+							</div>
+							<p class="hidden" style="font-size: 4rem;">⬆</p>
+						</div>
+						<div class="codeblock">
+							<strong>Server</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-ln-start-from="4" data-line-numbers="|3|9|12-19|">
+									server &lt;- function(input, output) {
+
+										output$distPlot &lt;- renderPlot({
+
+											x    &lt;- faithful$waiting
+											bins &lt;- seq(
+												min(x),
+												max(x),
+												length.out = input$bins + 1
+											)
+
+											hist(
+												x,
+												breaks = bins,
+												col    = "#75AADB",
+												border = "white",
+												xlab   = "Waiting time to...",
+												main   = "Histogram of..."
+											)
+
+										})
+
+									}
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="panel">
+						<img src="materials/images/example_faithful_15_bins.png" alt="example_faithful_15_bins">
+					</div>
+				</section>
+
+				<section>
+					<h2>The server updates the output</h2>
+					<div class="panel" style="width: 35%;">
+						<div>
+							<div class="codeblock fade-anim">
+								<strong>Ui</strong>
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers="|2">
+										mainPanel(
+											plotOutput(outputId = "distPlot")
+										)
+									</code>
+								</pre>
+							</div>
+							<p class="fade-anim" style="font-size: 4rem;">⬆</p>
+						</div>
+						<div class="codeblock">
+							<strong>Server</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-ln-start-from="4" data-line-numbers="|3">
+									server &lt;- function(input, output) {
+
+										output$distPlot &lt;- renderPlot({
+
+											x    &lt;- faithful$waiting
+											bins &lt;- seq(
+												min(x),
+												max(x),
+												length.out = input$bins + 1
+											)
+
+											hist(
+												x,
+												breaks = bins,
+												col    = "#75AADB",
+												border = "white",
+												xlab   = "Waiting time to...",
+												main   = "Histogram of..."
+											)
+
+										})
+
+									}
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="panel">
+						<img src="materials/images/example_faithful_30_bins.png" alt="example_faithful_30_bins">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Output Rendering functions</h2>
+					<table class="tabular" data-id="render_functions_table1" style="width: 65%">
+						<thead>
+							<tr>
+								<td>Output function</td>
+								<td>Creates</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>dataTableOutput</td>
+								<td>DataTable</td>
+							</tr>
+							<tr>
+								<td>htmlOutput</td>
+								<td>raw HTML</td>
+							</tr>
+							<tr>
+								<td>imageOutput</td>
+								<td>image</td>
+							</tr>
+							<tr>
+								<td>plotOutput</td>
+								<td>plot</td>
+							</tr>
+							<tr>
+								<td>tableOutput</td>
+								<td>table</td>
+							</tr>
+							<tr>
+								<td>textOutput</td>
+								<td>text</td>
+							</tr>
+							<tr>
+								<td>uiOutput</td>
+								<td>raw HTML</td>
+							</tr>
+							<tr>
+								<td>verbatimTextOutput</td>
+								<td>text</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Output Rendering functions</h2>
+					<table class="tabular" data-id="render_functions_table1" style="width: 65%">
+						<thead>
+							<tr>
+								<td>Output function</td>
+								<td>Creates</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="highlight">
+								<td>dataTableOutput</td>
+								<td>DataTable</td>
+							</tr>
+							<tr>
+								<td>htmlOutput</td>
+								<td>raw HTML</td>
+							</tr>
+							<tr>
+								<td>imageOutput</td>
+								<td>image</td>
+							</tr>
+							<tr class="highlight">
+								<td>plotOutput</td>
+								<td>plot</td>
+							</tr>
+							<tr>
+								<td>tableOutput</td>
+								<td>table</td>
+							</tr>
+							<tr class="highlight">
+								<td>textOutput</td>
+								<td>text</td>
+							</tr>
+							<tr>
+								<td>uiOutput</td>
+								<td>raw HTML</td>
+							</tr>
+							<tr>
+								<td>verbatimTextOutput</td>
+								<td>text</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section data-auto-animate data-menu-title="Exercise 1: Calculator">
+					<h2 class="highlight">Exercise 1</h2>
+					<p><strong>Resources:</strong></p>
+					<ul>
+						<li class="fragment">Exercises/<a href="../Exercises/1_calculator.R">1_calculator.R</a></li>
+						<li class="fragment">Input widgets: <a href="https://shiny.posit.co/r/gallery/widgets/widget-gallery/" target="_blank">Shiny widget gallery</a></li>
+						<li class="fragment">Render functions: <a href="https://github.com/rstudio/cheatsheets/blob/main/shiny.pdf" target="_blank">Shiny CHEATSHEET</a></li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2 class="highlight">Exercise 1</h2>
+					<p><strong>Task:</strong> Complete the code for the calculator app!</p>
+					<ol>
+						<li class="fragment">Add a nice title</li>
+						<li class="fragment">Add two widgets for the numeric input (<span class="highlight">Numeric input</span>, <span class="highlight">Slider</span>...)</li>
+						<li class="fragment">Add one widget for the mathematical operation (<span class="highlight">Radio buttons</span>, <span class="highlight">Select box</span>...)</li>
+						<li class="fragment">Use the inputs in the server function (change placeholders)</li>
+						<li class="fragment">Add the output of the calculation to the UI</li>
+						<li class="fragment">Use <span class="highlight">req(input$num2 != 0)</span> for safe division (<span class="highlight">?req</span>) <br> &nbsp;</li>
+					</ol>
+					<div class="fragment">
+						<p data-countdown data-time="900" data-autostart="no">15 min</p>
+						<img src="materials/images/red_alarm_clock1.jpg" alt="alarm_clock" style="width: 20%; margin: 0;">
+					</div>
+				</section>
+
+				<section>
+					<h2 class="highlight">Exercise 1</h2>
+					<p>One possible solution:</p>
+					<div class="codeblock" data-id="classic_r_code1" style="width: 75%;">
+						<pre class="r" style="height: 45rem;">
+							<code data-trim data-noescape data-line-numbers="|5|9-10|11-16|33-38|28|20|29-31|">
+								library(shiny)
+
+								# Define UI
+								ui &lt;- fluidPage(
+									titlePanel("Shiny Calculator"),
+
+									sidebarLayout(
+										sidebarPanel(
+											numericInput("num1", label = "Enter first number:", value = 0),
+											numericInput("num2", label = "Enter second number:", value = 0),
+											radioButtons("operation", label = "Choose operation:", choices = list(
+												"add",
+												"subtract",
+												"multiply",
+												"divide"
+											))
+										),
+										
+										mainPanel(
+											textOutput("result")
+										)
+									)
+								)
+
+								# Define server logic
+								server &lt;- function(input, output) {
+
+									output$result &lt;- renderText({
+										if (input$operation == "divide") {
+											req(input$num2 != 0)
+										}
+										
+										result &lt;- switch(input$operation,
+											"add"      = input$num1 + input$num2,
+											"subtract" = input$num1 - input$num2,
+											"multiply" = input$num1 * input$num2,
+											"divide"   = input$num1 / input$num2
+										)
+
+										paste("Result:", result)
+									})
+
+								}
+
+								# Run the application
+								shinyApp(ui = ui, server = server)
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate data-menu-title="Code encapsulation">
+					<h2 class="highlight">Exercise 1 - Continued</h2>
+					<p>What can we do if we need the result of the calculation more than once?</p>
+					<div class="panel" style="width: 45%;">
+						<div class="codeblock fragment" data-id="classic_r_code1">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|3-16|18-33|30|4-13|19-28">
+									server &lt;- function(input, output) {
+	
+										output$result &lt;- renderText({
+											if (input$operation == "divide") {
+												req(input$num2 != 0)
+											}
+
+											result &lt;- switch(input$operation,
+												"add"      = input$num1 + input$num2,
+												"subtract" = input$num1 - input$num2,
+												"multiply" = input$num1 * input$num2,
+												"divide"   = input$num1 / input$num2
+											)
+
+											paste("Result:", result)
+										})
+
+										output$otherResult &lt;- renderText({
+											if (input$operation == "divide") {
+												req(input$num2 != 0)
+											}
+	
+											result &lt;- switch(input$operation,
+												"add"      = input$num1 + input$num2,
+												"subtract" = input$num1 - input$num2,
+												"multiply" = input$num1 * input$num2,
+												"divide"   = input$num1 / input$num2
+											)
+
+											otherResult &lt;- result + 1
+
+											paste("The other result:", otherResult)
+										})
+										
+									}
+								</code>
+							</pre>
+						</div>
+						<p class="fragment">Duplicated code</p>
+					</div>
+					<div class="panel" style="width: 45%;">
+						<div class="codeblock fragment" data-id="classic_r_code1">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|4-16|17-19|21-24|4-16">
+									# Define server logic
+									server &lt;- function(input, output) {
+
+										result &lt;- reactive({
+											if (input$operation == "divide") {
+												req(input$num2 != 0)
+											}
+
+											switch(input$operation,
+												"add"      = input$num1 + input$num2,
+												"subtract" = input$num1 - input$num2,
+												"multiply" = input$num1 * input$num2,
+												"divide"   = input$num1 / input$num2
+											)
+										})
+
+										output$result &lt;- renderText({
+											paste("Result:", result())
+										})
+
+										output$otherResult &lt;- renderText({
+											otherResult &lt;- result() + 1
+											paste("The other result:", otherResult)
+										})
+
+									}
+								</code>
+							</pre>
+						</div>
+						<p class="fragment">Encapsulation</p>
+					</div>
+				</section>
+
+				<section data-auto-animate data-menu-title="Exercise 1: reactive()">
+					<h2 class="highlight">Exercise 1 - Continued</h2>
+					<p><strong>Task:</strong> Encapsulate the result calculation!</p>
+					<ol>
+						<li>Add a nice title</li>
+						<li>Add two widgets for the numeric input (<span class="highlight">Numeric input</span>, <span class="highlight">Slider</span>...)</li>
+						<li>Add one widget for the mathematical operation (<span class="highlight">Radio buttons</span>, <span class="highlight">Select box</span>...)</li>
+						<li>Use the inputs in the server function (change placeholders)</li>
+						<li>Add the output of the calculation to the UI</li>
+						<li>Use <span class="highlight">req(input$num2 != 0)</span> for safe division (<span class="highlight">?req</span>)</li>
+						<li class="fragment">Encapsulate the calculation in <span class="highlight">result &lt;- reactive({...})</span></li>
+					</ol>
+					<div class="fragment">
+						<p data-countdown data-time="300" data-autostart="no">5 min</p>
+						<img src="materials/images/red_alarm_clock1.jpg" alt="alarm_clock" style="width: 20%; margin: 0;">
+					</div>
+				</section>
+
+				<section data-auto-animate data-menu-title="Exercise 1: solution">
+					<h2 class="highlight">Exercise 1 - Continued</h2>
+					<p>One possible solution:</p>
+					<div class="codeblock" data-id="classic_r_code1" style="width: 75%;">
+						<pre class="r" style="height: 45rem;">
+							<code data-trim data-noescape data-line-numbers="|28-39|41-43">
+								library(shiny)
+
+								# Define UI
+								ui &lt;- fluidPage(
+									titlePanel("Shiny Calculator"),
+
+									sidebarLayout(
+										sidebarPanel(
+											numericInput("num1", "Enter first number:", value = 0),
+											numericInput("num2", "Enter second number:", value = 0),
+											radioButtons("operation", "Choose operation:", choices = list(
+												"add",
+												"subtract",
+												"multiply",
+												"divide"
+											))
+										),
+
+										mainPanel(
+											textOutput("result")
+										)
+									)
+								)
+
+								# Define server logic
+								server &lt;- function(input, output) {
+
+									result &lt;- reactive({
+										if (input$operation == "divide") {
+											req(input$num2 != 0)
+										}
+
+										switch(input$operation,
+											"add"      = input$num1 + input$num2,
+											"subtract" = input$num1 - input$num2,
+											"multiply" = input$num1 * input$num2,
+											"divide"   = input$num1 / input$num2
+										)
+									})
+
+									output$result &lt;- renderText({
+										paste("Result:", result())
+									})
+
+								}
+
+								# Run the application
+								shinyApp(ui = ui, server = server)
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate data-menu-title="Reactive Programming">
+					<h2>Reactive Programming in R Shiny</h2>
+					<div class="panel fragment" style="width: 35%;">
+						<h3>Classic R</h3>
+						<div class="codeblock" data-id="classic_r_code1">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									x &lt;- 2
+									y &lt;- x + 1
+									print(y) #3
+
+
+									&nbsp;
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="panel" style="width: 35%;">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Reactive Programming in R Shiny</h2>
+					<div class="panel" style="width: 35%;">
+						<h3>Classic R</h3>
+						<div class="codeblock" data-id="classic_r_code1">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									x &lt;- 2
+									y &lt;- x + 1
+									print(y) #3
+
+									x &lt;- 5
+									print(y) #?
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="panel" style="width: 35%;">
+						<img src="materials/images/poll_y_value_expired.png" alt="expired_poll_which_value_does_y_have">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Reactive Programming in R Shiny</h2>
+					<div class="panel" style="width: 35%;">
+						<h3>Classic R</h3>
+						<div class="codeblock" data-id="classic_r_code1">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									x &lt;- 2
+									y &lt;- x + 1
+									print(y) #3
+
+									x &lt;- 5
+									print(y) #3
+								</code>
+							</pre>
+						</div>
+						<p class="fragment">Imperative programming <br>(sequential)</p>
+					</div>
+					<div class="panel fragment" style="width: 35%;">
+						<h3>R Shiny</h3>
+						<div class="codeblock" data-id="reactive_r_code1">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									x &lt;- 2
+									y &lt;- reactive(x + 1)
+									print(y) #3
+
+									x &lt;- 5
+									print(y) #6
+								</code>
+							</pre>
+						</div>
+						<p class="fragment">Declarative style "Recipe"</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Reactive Programming in R Shiny</h2>
+					<p>Example: k-means app from the Shiny for R Gallery</p>
+					<div class="panel fragment" style="width: 24%; vertical-align: middle;">
+						<img src="materials/images/reactive_k_means_input_3.png" alt="k_means_input_3_clusters">
+					</div>
+					<div class="panel fragment" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide1.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel fragment" style="width: 24%; vertical-align: middle;">
+						<img src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-menu-title="k-means reactive graph">
+					<h2>Reactive Programming in R Shiny</h2>
+					<p>Example: k-means app from the Shiny for R Gallery</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide15.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+				</section>
+
+				<section data-menu-title="Reactive sources/consumers" data-transition="slide-in">
+					<h2>Reactive Programming in R Shiny</h2>
+					<p>Reactive expressions are only accessible within reactive consumers</p>
+					<div class="panel fragment" style="width: 75%;">
+						<div class="codeblock" data-id="reactive_r_code1">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|19">
+									# Define server logic
+									server &lt;- function(input, output) {
+
+										result &lt;- reactive({
+											# Handling division by zero with req()
+											if (input$operation == "divide") {
+												req(input$num2 != 0)
+											}
+
+											switch(input$operation,
+														"add"      = input$num1 + input$num2,
+														"subtract" = input$num1 - input$num2,
+														"multiply" = input$num1 * input$num2,
+														"divide"   = input$num1 / input$num2
+											)
+										})
+
+										# print(input$num1) also would not work
+										print(result())
+										
+										output$result &lt;- renderText({
+											paste("Result:", result())
+										})
+
+									}
+								</code>
+							</pre>
+						</div>
+						<p class="error_msg fragment">
+							Error in .getReactiveEnvironment()$currentContext() : <br>
+							&nbsp; Operation not allowed without an active reactive context. <br>
+							• You tried to do something that can only be done from inside a reactive consumer.
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate data-menu-title="Dependency Tracking">
+					<h2>Automatic Dependency Tracking</h2>
+					<p>Dependents dynamically register callbacks in reactive sources</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide2.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel fragment" style="width: 24%; vertical-align: middle;">
+						<div class="codeblock" style="font-size: 2rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|6|7|">
+									output$plot1 &lt;- renderPlot({
+										palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+															"#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+										
+										par(mar = c(5.1, 4.1, 0, 1))
+										plot(selectedData(),
+												col = clusters()$cluster,
+												pch = 20, cex = 3)
+										points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Automatic Dependency Tracking</h2>
+					<p>Dependents dynamically register callbacks in reactive sources</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide3.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<div class="codeblock" style="font-size: 2rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									output$plot1 &lt;- renderPlot({
+										palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+															"#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+										
+										par(mar = c(5.1, 4.1, 0, 1))
+										plot(selectedData(),
+												col = clusters()$cluster,
+												pch = 20, cex = 3)
+										points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Automatic Dependency Tracking</h2>
+					<p>Dependents dynamically register callbacks in reactive sources</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide4.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<div class="codeblock" style="font-size: 2rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									output$plot1 &lt;- renderPlot({
+										palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+															"#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+										
+										par(mar = c(5.1, 4.1, 0, 1))
+										plot(selectedData(),
+												col = clusters()$cluster,
+												pch = 20, cex = 3)
+										points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Automatic Dependency Tracking</h2>
+					<p>Dependents dynamically register callbacks in reactive sources</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide4.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<div class="codeblock" style="font-size: 2rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|3|9|8|">
+									# Combine the selected variables into a new data frame
+									selectedData &lt;- reactive({
+										iris[, c(input$xcol, input$ycol)]
+									})
+									
+									clusters &lt;- reactive({
+										kmeans(
+											selectedData(),
+											input$clusters
+										)
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Automatic Dependency Tracking</h2>
+					<p>Dependents dynamically register callbacks in reactive sources</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide5.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<div class="codeblock" style="font-size: 2rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# Combine the selected variables into a new data frame
+									selectedData &lt;- reactive({
+										iris[, c(input$xcol, input$ycol)]
+									})
+									
+									clusters &lt;- reactive({
+										kmeans(
+											selectedData(),
+											input$clusters
+										)
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Automatic Dependency Tracking</h2>
+					<p>Dependents dynamically register callbacks in reactive sources</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						&nbsp;
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide6.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<div class="codeblock" style="font-size: 2rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# Combine the selected variables into a new data frame
+									selectedData &lt;- reactive({
+										iris[, c(input$xcol, input$ycol)]
+									})
+									
+									clusters &lt;- reactive({
+										kmeans(
+											selectedData(),
+											input$clusters
+										)
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-menu-title="Invalidation and flush events">
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>&nbsp;</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img src="materials/images/reactive_k_means_input_3.png" alt="k_means_input_3_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide1.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_output" src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>Changed input triggers cascade of invalidation events</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_input" src="materials/images/reactive_k_means_input_5.png" alt="k_means_input_5_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide7.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_output" src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>Changed input triggers cascade of invalidation events</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_input" src="materials/images/reactive_k_means_input_5.png" alt="k_means_input_5_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide8.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_output" src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>Changed input triggers cascade of invalidation events</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_input" src="materials/images/reactive_k_means_input_5.png" alt="k_means_input_5_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide9.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_output" src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>Invalidated nodes queue the callbacks on the server</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_input" src="materials/images/reactive_k_means_input_5.png" alt="k_means_input_5_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide10.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_output" src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>Following collection, the server schedules the execution of the callbacks "flush"</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_input" src="materials/images/reactive_k_means_input_5.png" alt="k_means_input_5_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide11.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_output" src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>And invalid nodes become cleared...</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_input" src="materials/images/reactive_k_means_input_5.png" alt="k_means_input_5_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide12.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_output" src="materials/images/reactive_k_means_output_3.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Re-Calculation of reactive dependencies</h2>
+					<p>...completing the cycle</p>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img data-id="k_means_input" src="materials/images/reactive_k_means_input_5.png" alt="k_means_input_5_clusters">
+					</div>
+					<div class="panel" style="width: 50%; vertical-align: middle;">
+						<img data-id="k_means_reactive_graph" src="materials/images/reactive_graph/Slide13.png" alt="k_means_reactive_graph" style="margin-top: 0px;">
+					</div>
+					<div class="panel" style="width: 24%; vertical-align: middle;">
+						<img src="materials/images/reactive_k_means_output_5.png" alt="k_means_plot_3_clusters">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Reactive Programming in R Shiny</h2>
+					<div class="panel" style="width: 60%;">
+						<strong>Overview from R Shiny CHEATSHEET</strong>
+						<img src="materials/images/reactivity-diagram.png" alt="reactivity diagram">
+					</div>
+					<div class="panel" style="width: 35%;">
+						<strong>Functions</strong>
+						<ul>
+							<li class="fragment"><strong class="highlight">reactive():</strong> lazy, cached</li>
+							<li class="fragment"><strong class="highlight">observe():</strong> eager, no value returned (arbitrary code)</li>
+							<li class="fragment"><strong class="highlight">reactiveValues():</strong> list of reactive values (like input$...)</li>
+							<li class="fragment"><strong class="highlight">events:</strong> click, double-click etc.</li>
+							<li class="fragment"><strong class="highlight">isolate():</strong> stop reactions (avoid dependencies). Useful when many inputs, update often will occur on clicking a button</li>
+							<li class="fragment"><strong class="highlight">invalidateLater():</strong> automatic re-calculation, used in <span class="highlight">runExample("11_timer")</span></li>
+						</ul>
+					</div>
+				</section>
+				<aside class="footnotes">
+					<p>
+						adapted from <a href="https://github.com/rstudio/cheatsheets/blob/main/shiny.pdf" target="_blank">https://github.com/rstudio/cheatsheets/blob/main/shiny.pdf</a> Posit Software, PBC <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+					</p>
+				</aside>
+
+				<section data-auto-animate data-menu-title="Best practices">
+					<h2>Best practices</h2>
+					<ul>
+						<li class="fragment"><strong>Encapsulate</strong> logical units to minimise dependencies and avoid unnecessary recalculations when irrelevant inputs are changed</li>
+						<li class="fragment">This also helps to avoid the accidental creation of loops</li>
+						<li class="fragment">Use <span class="highlight">req()</span> to avoid errors due to missing inputs, especially when opening the application</li>
+						<li class="fragment">Carefully check the IDs of the inputs and outputs</li>
+						<li class="fragment">Troubleshooting: use the <a href="../Misc/k_means_reactlog.R">library(reactlog)</a></li>
+						<li class="fragment">Modularise, i.e. store ui and server as variables. This for example allows you to dynamically load parts of the UI later.</li>
+					</ul>
+				</section>
+
+				<section data-menu-title="Further reading">
+					<h2>Further reading</h2>
+					<div class="card" style="margin: auto;">
+						<h3>Background</h3>
+						<ul>
+							<li><a href="https://shiny.posit.co/r/getstarted" target="_blank">R Shiny Get Started</a></li>
+							<li><a href="https://www.youtube.com/watch?v=cqOUpnF-Lco" target="_blank">Video: R Tutorial: Reactivity 101</a></li>
+							<li><a href="https://shiny.posit.co/r/articles/build/understanding-reactivity/" target="_blank">How to understand reactivity in R</a></li>
+							<li><a href="https://www.youtube.com/watch?v=BufC0agHnzw" target="_blank">Video: Shiny Modules in 100 Seconds</a></li>
+						</ul>
+						<h3>Resources</h3>
+						<ul>
+							<li><a href="https://github.com/rstudio/cheatsheets/blob/main/shiny.pdf" target="_blank">R Shiny CHEATSHEET</a></li>
+							<li><a href="https://shiny.posit.co/r/gallery/widgets/widget-gallery/" target="_blank">R Shiny Widget Gallery</a></li>
+							<li><a href="https://shiny.posit.co/r/gallery/" target="_blank">R Shiny Gallery</a></li>
+						</ul>
+						<img src="materials/images/mystical_book.jpg" alt="mystical_book" style="width: 20%; margin: 0;">
+					</div>
+				</section>
+
+				<section>
+					<h2>Questions?</h2>
+				</section>
+
+			</div>
+		</div>
+		<script src="scripts/jquery-3.7.1.min.js"></script>
+		<!-- <script src="scripts/reveal-poll/poll/poll.js"></script> -->
+		<script src="scripts/revealjs/dist/reveal.js"></script>
+		<script src="scripts/revealjs/plugin/notes/notes.js"></script>
+		<script src="scripts/revealjs/plugin/markdown/markdown.js"></script>
+		<script src="scripts/revealjs/plugin/zoom/zoom.js"></script>
+		<script src="scripts/revealjs/plugin/search/search.js"></script>
+		<script src="scripts/revealjs/plugin/highlight/highlight.js"></script>
+		<script src="scripts/reveal-pointer/pointer.js"></script>
+		<script src="scripts/reveal-menu/menu.js"></script>
+		<script src="scripts/reveal-mermaid/mermaid.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				width: 1920,
+  				height: 1080,
+				controls: true,
+				transition: "none",
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealNotes, RevealZoom, RevealSearch, RevealHighlight, RevealPointer, RevealMenu, RevealMermaid ],
+
+				// Plugin settings
+				pointer: {
+					key: "q", // key to enable pointer, default "q", not case-sensitive
+					color: "#60da77", // color of a cursor, default "red" any valid CSS color
+					opacity: 0.95, // opacity of cursor, default 0.8
+					pointerSize: 14, // pointer size in px, default 12
+					alwaysVisible: false, // should pointer mode be always visible? default "false"
+					tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+				},
+
+				menu: {
+					titleSelector: '',
+					hideMissingTitles: true
+				},
+
+				// Further dependencies
+				dependencies: [
+					// { src: 'scripts/reveal-poll/poll/poll.js', async: true }, POLLS DEACTIVATED AFTER LESSON
+					{ src: "scripts/reveal-countdown/countdown_adj.js" }
+				],
+
+				countdown: { defaultTime: 600, autostart: "no" }
+			});
+		</script>
+	</body>
+</html>

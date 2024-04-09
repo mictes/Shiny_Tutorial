@@ -1,0 +1,180 @@
+@keyframes gradient_anim {
+	0% {
+		background-position:  0% 50%;
+	}
+	100% {
+		background-position:  100% 50%;
+	}
+}
+
+aside.footnotes p
+{
+	margin: 0;
+}
+
+aside.footnotes
+{
+	display: none;
+}
+
+h1.shiny,h2.shiny,.shiny
+{
+	animation: gradient_anim 14s ease-in-out infinite alternate;
+	background: linear-gradient(120deg, rgba(0,204,85,1) 0%, rgba(0,119,204,1) 15%, rgba(99,20,204,1) 35%, rgba(136,0,204,1) 47%, rgba(221,102,17,1) 58%, rgba(115,151,50,1) 64%, rgba(0,187,85,1) 73%, rgba(0,119,204,1) 87%, rgba(0,85,170,1) 100%);
+	background-clip: text;
+	background-size: 500% auto;
+	color: transparent;
+}
+
+img
+{
+	vertical-align: middle;
+}
+
+li
+{
+	margin-left: 1em;
+}
+
+section a,aside a
+{
+	pointer-events: all;
+}
+
+section.present + aside.footnotes
+{
+	bottom: 0;
+	display: block;
+	left: 0;
+	position: absolute;
+	z-index: 99;
+}
+
+section.present .fade-anim
+{
+	opacity: 1;
+	transition: all .5s;
+}
+
+ul
+{
+	padding-bottom: 1em;
+}
+
+.card
+{
+	font-size: .8em;
+	max-width: 50%;
+	padding-left: 25%;
+	text-align: justify;
+}
+
+.codeblock pre.code-wrapper
+{
+	margin: 6px 1rem;
+	width: calc(100% - 2rem);
+}
+
+.codeblock strong
+{
+	background: #058;
+	display: inline-block;
+	font-size: 1.5rem;
+	margin-top: -1px;
+	padding: 5px 1rem;
+	vertical-align: top;
+	width: calc(100% - 2rem);
+}
+
+.codeblock
+{
+	background: #12181E!important;
+	border: 1px solid #036;
+	border-radius: 8px;
+	border-top: 6px solid #058;
+	margin: auto;
+	width: 95%;
+}
+
+.error_msg
+{
+	color: #C05;
+	font-size: 2rem;
+	padding: 1.3rem;
+	text-align: left;
+}
+
+.floatingbox
+{
+	background-color: rgba(0,0,0,0.9);
+	box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2);
+	color: #fff;
+	font-size: 20px;
+	padding: 20px;
+	position: absolute;
+	right: 0;
+	text-align: left;
+	top: 250px;
+	width: 40%;
+}
+
+.footnotes a
+{
+	color: #058;
+}
+
+.footnotes
+{
+	color: #777;
+	font-size: .5em;
+	margin-bottom: 10px;
+	padding-left: 84px;
+}
+
+.fragment.blur
+{
+	filter: blur(5px);
+}
+
+.fragment.blur.visible
+{
+	filter: none;
+}
+
+.highlight
+{
+	color: #09F!important;
+}
+
+.inline
+{
+	display: inline-block!important;
+	vertical-align: middle!important;
+}
+
+.mermaid svg[style]
+{
+	max-width: none!important;
+}
+
+.panel
+{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.tabular tbody tr
+{
+	border-bottom: 2px solid #777;
+}
+
+.tabular thead tr
+{
+	border-bottom: 2px solid #FFF;
+	font-weight: 700;
+}
+
+.fade-anim,.hidden
+{
+	opacity: 0;
+}
