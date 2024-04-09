@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+	<!--
+		mictes
+		2024-04-06
+
+		https://github.com/mictes
+
+		R Shiny tutorial for the MLS PhD Program, University of Zurich
+	-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>R Shiny :: ggplot2</title>
+
+		<link rel="stylesheet" href="scripts/revealjs/dist/reset.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/reveal.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="scripts/reveal-highlight/arta_adj.css">
+
+		<!-- 3rd party libraries -->
+		<link rel="stylesheet" href="scripts/reveal-poll/poll/poll_adj.css">
+		<link rel="stylesheet" href="scripts/reveal-pointer/pointer.css">
+		<link rel="stylesheet" href="scripts/reveal-menu/menu.css">
+
+		<!-- custom styles -->
+		<link rel="stylesheet" href="styles/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="title">
+					<h1 class="shiny">Interactive Data Visualization with R Shiny for Life Sciences</h1>
+					<h2>Day 1: ggplot2 recap</h2>
+					<strong>Michael Teske &amp; Jonas Schmid, Zurich 08 April 2024</strong>
+				</section>
+
+				<section data-auto-animate>
+					<h2>grammar of graphics</h2>
+					<img src="materials/images/ggplot2_logo.png" alt="ggplot2_logo" width="200" data-id="ggplot2_logo"> <br>
+					<p>&nbsp;</p> <br>
+					<div class="panel fragment" style="width: 35%;" data-id="Iris_data">
+						<strong>Data</strong>
+						<table style="font-size: 1.3rem;">
+							<thead>
+								<tr>
+									<td>Sepal.Length</td>
+									<td>Sepal.Width</td>
+									<td>Petal.Length</td>
+									<td>Petal.Width</td>
+									<td>Species</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>5.1</td>
+									<td>3.5</td>
+									<td>1.4</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>4.9</td>
+									<td>3</td>
+									<td>1.4</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>4.7</td>
+									<td>3.2</td>
+									<td>1.3</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>4.6</td>
+									<td>3.1</td>
+									<td>1.5</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td>3.6</td>
+									<td>1.4</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td colspan="5">...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="panel fragment" style="width: 30%;">
+						<strong>Aesthetics</strong> <br>
+						<ul>
+							<li>X axis</li>
+							<li>Y axis</li>
+							<li>Point colour</li>
+							<li>...</li>
+						</ul>
+					</div>
+					<div class="panel fragment" style="width: 30%;">
+						<strong>Geometry</strong> <br>
+						<ul>
+							<li>Barplot</li>
+							<li>Boxplot</li>
+							<li>Scatterplot</li>
+							<li>Lineplot</li>
+							<li>...</li>
+						</ul>
+					</div>
+				</section>
+				<aside class="footnotes">
+					<p>
+						<a href="https://ggplot2.tidyverse.org/" target="_blank">ggplot2.tidyverse.org</a>
+					</p>
+				</aside>
+
+				<section data-auto-animate>
+					<h2>grammar of graphics</h2>
+					<img src="materials/images/ggplot2_logo.png" alt="ggplot2_logo" width="200" data-id="ggplot2_logo"> <br>
+					<p>&nbsp;</p> <br>
+					<div class="panel" style="width: 35%;" data-id="Iris_data">
+						<strong>Data</strong>
+						<table style="font-size: 1.3rem;">
+							<thead>
+								<tr>
+									<td>Sepal.Length</td>
+									<td>Sepal.Width</td>
+									<td><strong class="highlight">Petal.Length</strong></td>
+									<td><strong class="highlight">Petal.Width</strong></td>
+									<td><strong class="highlight">Species</strong></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>5.1</td>
+									<td>3.5</td>
+									<td>1.4</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>4.9</td>
+									<td>3</td>
+									<td>1.4</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>4.7</td>
+									<td>3.2</td>
+									<td>1.3</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>4.6</td>
+									<td>3.1</td>
+									<td>1.5</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td>3.6</td>
+									<td>1.4</td>
+									<td>0.2</td>
+									<td>setosa</td>
+								</tr>
+								<tr>
+									<td colspan="5">...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="panel" style="width: 50%;">
+						<p>&nbsp;</p>
+						<div class="codeblock">
+						<pre>
+ggplot(data, aes(x=<span class="highlight">Petal.Length</span> y=<span class="highlight">Petal.Width</span>)) + 
+	geom_point(aes(color=<span class="highlight">Species</span>))
+						</pre>
+						</div>
+					</div>
+				</section>
+				<aside class="footnotes">
+					<p>
+						<a href="https://ggplot2.tidyverse.org/" target="_blank">ggplot2.tidyverse.org</a>
+					</p>
+				</aside>
+
+				<section data-auto-animate>
+					<h2>grammar of graphics</h2>
+					<div class="card">
+						<ul>
+							<li class="fragment"><strong class="highlight">Package</strong>: library(ggplot2) OR library(tidyverse)</li>
+							<li class="fragment"><strong class="highlight">Data</strong>: ggplot2 works with data frames, allowing you to map variables in your data to visual elements in your plot.</li>
+							<li class="fragment"><strong class="highlight">Aesthetic Mapping</strong>: Aesthetic mappings define how variables in your dataset are mapped to visual properties of the plot, such as x and y axes, color, shape, size, etc.</li>
+							<li class="fragment"><strong class="highlight">Geometric Objects (geoms)</strong>: Geoms are the actual graphical representations of data points in your plot, such as points, lines, bars, and polygons.</li>
+							<li class="fragment"><strong class="highlight">Layers</strong>: In ggplot2, plots are built up in layers, where each layer adds additional information to the plot. Layers typically consist of geoms (geometric objects) and stats (statistical transformations).</li>
+							<li class="fragment"><strong class="highlight">Themes</strong>: Themes control the overall appearance of the plot, including axes, background, text, etc. ggplot2 provides several built-in themes, and you can customize themes to match your preferences or the requirements of your visualization.</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>Further Reading</h2>
+					<div class="card" style="margin: auto;">
+						<h3>Background</h3>
+						<ul>
+							<li><a href="https://ggplot2.tidyverse.org/articles/ggplot2.html" target="_blank">Introduction to ggplot2</a></li>
+							<li><a href="https://www.youtube.com/watch?v=FdVy57oGJuc" target="_blank">Video: ggplot2 explained in 5 minutes!</a></li>
+						</ul>
+						<h3>Resources</h3>
+						<ul>
+							<li><a href="https://r-graph-gallery.com/" target="_blank">R Graph Gallery</a></li>
+							<li><a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf" target="_blank">ggplot2 CHEATSHEET</a></li>
+						</ul>
+						<img src="materials/images/mystical_book.jpg" alt="mystical_book" style="width: 20%; margin: 0;">
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Let's create a plot!</h2>
+					<div class="panel" style="width: 45%;">
+						<img src="materials/images/Iris_violin_point.png" alt="Iris_ViolinPlot" data-id="Iris_plot" width="600">
+					</div>
+					<div class="panel" style="width: 45%;">
+						<div class="codeblock" data-id="Iris_code">
+							<strong>Iris Dataset :: Violin Plot</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									data(iris)
+
+									ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+										geom_violin(aes(fill=Species)) + 
+										geom_point() + 
+										geom_boxplot(width=0.1)
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Let's create a plot!</h2>
+					<div class="panel" style="width: 45%;">
+						<img src="materials/images/Iris_violin.png" alt="Iris_ViolinPlot_quasirandom" data-id="Iris_plot" width="600">
+					</div>
+					<div class="panel" style="width: 45%;">
+						<div class="codeblock" data-id="Iris_code">
+							<strong>Iris Dataset :: Violin Plot</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|1|7|">
+									library(ggbeeswarm)
+
+									data(iris)
+
+									ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+										geom_violin(aes(fill=Species)) + 
+										geom_quasirandom() + 
+										geom_boxplot(width=0.1)
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Let's create a plot! - Variant 2</h2>
+					<div class="panel" style="width: 45%;">
+						<img src="materials/images/Ruhland2016_volcano.png" alt="Ruhland2016_VolcanoPlot" data-id="Ruhland2016_plot" width="700">
+					</div>
+					<div class="codeblock" data-id="Ruhland2016_code">
+						<strong>Ruhland2016 Dataset :: Volcano Plot</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers="|2|5-10|13-14|15-22|25-29|">
+								# Load data
+								ruhland2016 &lt;- read.csv('Ruhland2016.csv', row.names=1)
+								
+								# Mark differentially expressed genes
+								log2FCthreshold &lt;- log2(1.5)
+								p_threshold     &lt;- 0.05
+								
+								ruhland2016$Expression &lt;- 'not sign.'
+								ruhland2016$Expression[ruhland2016$log2FoldChange >= log2FCthreshold & ruhland2016$pval &lt;= p_threshold]  &lt;- 'Up'
+								ruhland2016$Expression[ruhland2016$log2FoldChange &lt;= -log2FCthreshold & ruhland2016$pval &lt;= p_threshold] &lt;- 'Down'
+								
+								# Plot
+								ggplot(ruhland2016, aes(x=log2FoldChange, y=-log10(pvalue), col=Expression)) +
+										geom_point() +
+										geom_vline(
+											xintercept  = c(-log2FCthreshold, log2FCthreshold),
+											linetype    ='dotted'
+										) +
+										geom_hline(
+											yintercept  = -log10(p_threshold),
+											linetype    = 'dotted'
+										) +
+										ggtitle('senescent vs wt') +
+										# Optional
+										scale_colour_manual(values=c(
+											'not sign.'  = '#777777',
+											'Up'         = '#FF3344',
+											'Down'       = '#0077CC'
+										))
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section>
+					<h2>Questions?</h2>
+				</section>
+
+				<section>
+					<h2 class="highlight">Exercise 2</h2>
+					<p><strong>Task:</strong> Create a plot with ggplot2!</p>
+					<div class="panel" style="width: 25%;">
+						<img src="materials/images/Iris_violin.png" alt="Iris_ViolinPlot_quasirandom" width="440">
+						<div class="codeblock">
+							<strong>Iris Dataset :: Violin Plot</strong>
+							<pre class="r" style="font-size: 1rem;">
+								<code data-trim data-noescape data-line-numbers>
+									library(tidyverse)
+									library(ggbeeswarm)
+
+									data(iris)
+
+									ggplot(iris, aes(x=..., y=...)) + 
+										...
+								</code>
+							</pre>
+						</div>
+					</div>
+					<div class="panel" style="width: 74%;">
+						<div>
+							<div class="panel">
+								<img src="materials/images/Ruhland2016_volcano.png" alt="Ruhland2016_VolcanoPlot" width="750">
+							</div>
+							<div class="panel fragment" style="width: 40%">
+								<p data-countdown data-time="900" data-autostart="no">15 min</p>
+								<img src="materials/images/red_alarm_clock1.jpg" alt="alarm_clock" style="width: 50%; margin: 0;">
+							</div>
+						</div>
+						<div class="codeblock">
+							<strong>Ruhland 2016 RNA-seq :: Violin Plot</strong>
+							<pre class="r" style="font-size: 1rem;">
+								<code data-trim data-noescape data-line-numbers>
+									# Load data
+									ruhland2016 &lt;- read.csv('Ruhland2016.csv', row.names=1)
+
+									# Mark differentially expressed genes - HINT: Wrap this part in a reactive({})!
+									log2FCthreshold &lt;- log2(1.5)
+									p_threshold     &lt;- 0.05
+
+									ruhland2016$Expression &lt;- 'not sign.'
+									ruhland2016$Expression[ruhland2016$log2FoldChange >= log2FCthreshold & ruhland2016$pval &lt;= p_threshold]  &lt;- 'Up'
+									ruhland2016$Expression[ruhland2016$log2FoldChange &lt;= -log2FCthreshold & ruhland2016$pval &lt;= p_threshold] &lt;- 'Down'
+										...
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+				<aside class="footnotes">
+					<p>
+						Ruhland, M. K. et al., 2016 <a href="https://doi.org:/10.1038/ncomms11762" target="_blank">https://doi.org:/10.1038/ncomms11762</a> Posit Software, PBC <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+					</p>
+				</aside>
+
+			</div>
+		</div>
+		<script src="scripts/jquery-3.7.1.min.js"></script>
+		<!-- <script src="scripts/reveal-poll/poll/poll.js"></script> -->
+		<script src="scripts/revealjs/dist/reveal.js"></script>
+		<script src="scripts/revealjs/plugin/notes/notes.js"></script>
+		<script src="scripts/revealjs/plugin/markdown/markdown.js"></script>
+		<script src="scripts/revealjs/plugin/zoom/zoom.js"></script>
+		<script src="scripts/revealjs/plugin/search/search.js"></script>
+		<script src="scripts/revealjs/plugin/highlight/highlight.js"></script>
+		<script src="scripts/reveal-pointer/pointer.js"></script>
+		<script src="scripts/reveal-menu/menu.js"></script>
+		<script src="scripts/reveal-mermaid/mermaid.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				width: 1920,
+  				height: 1080,
+				controls: true,
+				transition: "none",
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealNotes, RevealZoom, RevealSearch, RevealHighlight, RevealPointer, RevealMenu, RevealMermaid ],
+
+				// Plugin settings
+				pointer: {
+					key: "q", // key to enable pointer, default "q", not case-sensitive
+					color: "#60da77", // color of a cursor, default "red" any valid CSS color
+					opacity: 0.95, // opacity of cursor, default 0.8
+					pointerSize: 14, // pointer size in px, default 12
+					alwaysVisible: false, // should pointer mode be always visible? default "false"
+					tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+				},
+
+				menu: {
+					titleSelector: '',
+					hideMissingTitles: true
+				},
+
+				// Further dependencies
+				dependencies: [
+					// { src: 'scripts/reveal-poll/poll/poll.js', async: true }, POLLS DEACTIVATED AFTER LESSON
+					{ src: "scripts/reveal-countdown/countdown_adj.js" }
+				],
+
+				countdown: { defaultTime: 600, autostart: "no" }
+			});
+		</script>
+	</body>
+</html>
