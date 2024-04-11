@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+	<!--
+		mictes
+		2024-04-10
+
+		https://github.com/mictes
+
+		R Shiny tutorial for the MLS PhD Program, University of Zurich
+	-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>R Shiny :: Webdevelopment</title>
+
+		<link rel="stylesheet" href="scripts/revealjs/dist/reset.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/reveal.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="scripts/reveal-highlight/arta_adj.css">
+
+		<!-- 3rd party libraries -->
+		<!-- <link rel="stylesheet" href="scripts/reveal-poll/poll/poll_adj.css"> -->
+		<link rel="stylesheet" href="scripts/reveal-pointer/pointer.css">
+		<link rel="stylesheet" href="scripts/reveal-menu/menu.css">
+
+		<!-- custom styles -->
+		<link rel="stylesheet" href="styles/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="title" data-menu-title="Webdevelopment Intro" data-background-image="materials/images/floating_Earth.webp" style="background: #000000aa; box-shadow: 1px 1px 500px 200px #000000aa;">
+					<h1 class="shiny">Interactive Data Visualization with R Shiny for Life Sciences</h1>
+					<h2>Adventure: Web development in 15 minutes</h2>
+					<strong>Michael Teske &amp; Jonas Schmid, Zurich 11 April 2024</strong>
+				</section>
+				<aside class="footnotes" style="background: #00000055; color: #AAAAAA; padding: 0 12px; margin-left: 84px;">
+					<p>
+						Background created with DALL·E 3 (<a href="https://openai.com/" target="_blank" style="color: #0077CC;">https://openai.com/</a>) and upscaled using Bigjpg (<a href="https://bigjpg.com" target="_blank" style="color: #0077CC;">https://bigjpg.com</a>) - mictes, April 2024
+					</p>
+				</aside>
+
+				<section>
+					<h2>How do websites work?</h2>
+					<p class="fragment">A server creates and sends the webpage data, which is then rendered by a browser (Firefox, Chrome etc.)</p>
+					<div>
+						<div class="panel fragment" style="width: 50%;">
+							<img src="materials/images/example_k_means.png" alt="ui" height="250">
+							<img src="materials/images/arrow_left.svg" alt="ui" height="50" style="margin-left: 1.5rem;">
+							<img src="materials/images/notebook_r_studio.png" alt="ui" height="150"> <br>
+							<p class=fragment>R Shiny creates webpages!</p>
+						</div>
+						<div class="panel fragment" style="width: 20%;">
+							<img src="materials/images/view_page_source_firefox.png" alt="view_page_source">
+						</div>
+					</div>
+				</section>
+
+				<section data-menu-title="HTML Introduction">
+					<h2>Introduction to HTML</h2>
+					<div class="card">
+						<p class="fragment">
+							HTML, or <span class="highlight">H</span>yper<span class="highlight">T</span>ext <span class="highlight">M</span>arkup <span class="highlight">L</span>anguage, serves as the foundation for creating web pages. It employs elements enclosed in tags to structure content.
+						</p>
+						<ul>
+							<li class="fragment">Elements consist of opening and closing tags: <br> <span class="highlight">&lt;element&gt;</span>Content<span class="highlight">&lt;/element&gt;</span></li>
+							<li class="fragment">HTML elements can have attributes: <br> &lt;element <span class="highlight">attribute="..."</span>&gt;...&lt;/element&gt;</li>
+							<li class="fragment">Void elements like the img tag do not require closing tags: <br> <span class="highlight">&lt;img src="..."&gt;</span></li>
+							<li class="fragment">
+								Anatomy of an HTML Document:
+								<div class="codeblock">
+									<pre class="html">
+										<code data-trim data-noescape data-line-numbers>
+											&lt;!DOCTYPE html&gt;
+											&lt;html&gt;
+												&lt;head&gt;Information about the Document&lt;/head&gt;
+												&lt;body>Actual Content&lt;/body&gt;
+											&lt;/html&gt;							
+										</code>
+									</pre>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>R Shiny creates HTML Documents</h2>
+					<p class="fragment" data-fragment-index="1">Shiny abstracts away a lot of complexity for us!</p>
+					<p class="fragment" data-fragment-index="4">We are still allowed to change the generated HTML, breaking free of predefined options in R Shiny.</p>
+					<div class="panel fragment" style="width: 22%;" data-fragment-index="2">
+						<div class="codeblock">
+						<strong>R Shiny</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									sliderInput(
+										"dotsize", 
+										label = "Dot Size", 
+										min   = 0.1, 
+										max   = 5, 
+										value = 1, 
+										step  = 0.1
+									)
+								</code>
+							</pre>
+						</div>
+						<img src="materials/images/dot_size_slider.png" alt="dot_size_slider" width="300">
+					</div>
+					<div class="panel fragment" style="width: 75%;" data-fragment-index="3">
+						<div class="codeblock">
+						<strong>produced HTML</strong>
+							<pre class="html" style="height: 42rem;">
+								<code data-trim data-noescape data-line-numbers>
+									&lt;div class="form-group shiny-input-container"&gt;
+										&lt;label class="control-label" id="dotsize-label" for="dotsize"&gt;Dot Size&lt;/label&gt;
+										&lt;span class="irs irs--shiny js-irs-0 irs-with-grid"&gt;
+											&lt;span class="irs"&gt;
+												&lt;span class="irs-line" tabindex="0"&gt;&lt;/span&gt;
+												&lt;span class="irs-min" style="visibility: visible;"&gt;0.1&lt;/span&gt;
+												&lt;span class="irs-max" style="visibility: visible;"&gt;5&lt;/span&gt;
+												&lt;span class="irs-from" style="visibility: hidden;"&gt;0&lt;/span&gt;
+												&lt;span class="irs-to" style="visibility: hidden;"&gt;0&lt;/span&gt;
+												&lt;span class="irs-single" style="left: 18.8178%;"&gt;1&lt;/span&gt;
+											&lt;/span&gt;
+											&lt;span class="irs-grid" style="width: 89%; left: 5.4%;"&gt;
+												&lt;span class="irs-grid-pol" style="left: 0%"&gt;&lt;/span&gt;
+												&lt;span class="irs-grid-text js-grid-text-0" style="left: 0%; margin-left: -4.625%;"&gt;0.1&lt;/span&gt;
+												&lt;span class="irs-grid-pol small" style="left: 6.802721088435375%"&gt;&lt;/span&gt;
+												&lt;!-- Other grid spans omitted for brevity --&gt;
+												&lt;span class="irs-grid-text js-grid-text-10" style="left: 100%; visibility: visible; margin-left: -2.75%;"&gt;5&lt;/span&gt;
+											&lt;/span&gt;
+											&lt;span class="irs-bar irs-bar--single" style="left: 0px; width: 21.8469%;"&gt;&lt;/span&gt;
+											&lt;span class="irs-shadow shadow-single" style="display: none;"&gt;&lt;/span&gt;
+											&lt;span class="irs-handle single" style="left: 16.3469%;"&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+										&lt;/span&gt;
+										&lt;input class="js-range-slider irs-hidden-input shiny-bound-input" id="dotsize" data-skin="shiny" data-min="0.1" data-max="5" data-from="1" data-step="0.1" data-grid="true" data-grid-num="9.8" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number" tabindex="-1" readonly=""&gt;
+									&lt;/div&gt;
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-menu-title="Web Technologies">
+					<h2>3 Key Web Technologies</h2>
+					<p class="fragment">HTML alone is just colourless, static content. <span class="fragment">Therefore, HTML documents usually include CSS and JavaScript.</span></p>
+					<ul>
+						<li class="fragment"><strong class="highlight">HTML</strong> (HyperText Markup Language): Structure of the document/content</li>
+						<li class="fragment"><strong class="highlight">CSS</strong> (Cascading Style Sheets): Styling of HTML elements (size, colour etc.)</li>
+						<li class="fragment"><strong class="highlight">JavaScript</strong>: function/interactivity</li>
+					</ul>
+				</section>
+
+				<section data-menu-title="Selectors">
+					<h2>Selectors</h2>
+					<p class="fragment">To apply CSS or JavaScript to HTML elements, they need to be found. <span class="fragment">This is accomplished with <strong>selectors</strong>.</span></p>
+					<ul>
+						<li class="fragment"><strong class="highlight">Tag selector</strong>: finding all HTML elements just with a specific tag (e.g. <strong class="highlight">img</strong>)</li>
+						<li class="fragment"><strong class="highlight">ID</strong>: finding an HTML element with an unique ID, using a hashtag (e.g. <strong class="highlight">#dotsize</strong>)</li>
+						<li class="fragment"><strong class="highlight">Class</strong>: finding HTML elements with a specific class, using a dot (e.g. <strong class="highlight">.btn</strong>)</li>
+					</ul>
+					<div class="codeblock fragment" style="width: 55%;">
+						<pre class="html">
+							<code data-trim data-noescape data-line-numbers>
+								&lt;img src="..." id="uniqueId" class="class-one class-two"&gt;
+							</code>
+						</pre>
+					</div>
+					<p class="fragment">
+						Elements can have both an ID and classes. <span class="fragment">They can also be combined in a selector to be more specific.</span>
+					</p>
+					<div class="codeblock fragment" style="width: 55%;">
+						<pre class="css">
+							<code data-trim data-noescape data-line-numbers>
+								img.class-one
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section>
+					<h2>Let's see if you understood!</h2>
+					<div class="panel" style="width: 50%;">
+						<img src="materials/images/poll_selectors_expired.png" alt="expired_poll_css_ids_classes hashtag or point, unique or can be used many times">
+					</div>
+				</section>
+
+				<section data-menu-title="CSS Introduction">
+					<h2>CSS Rules</h2>
+					<p>Some common properties:</p>
+					<div class="codeblock fragment" style="width: 55%;">
+						<pre class="css">
+							<code data-trim data-noescape data-line-numbers="|3|5-8|10-13|">
+								/* Comment */
+
+								tag {width: 200px}
+
+								#id {
+									color: #0077CC;
+									font-size: 12pt;
+								}
+
+								.class {
+									margin: 12pt;
+									background: #FFFFFF;
+								}
+							</code>
+						</pre>
+					</div>
+					<p class="fragment">selector { property: value ; }</p>
+				</section>
+
+				<section data-auto-animate data-menu-title="RGB Colours">
+					<h2>Colour Codes</h2>
+					<p class="fragment">Colours are composed of red, green &amp; blue (RGB)</p>
+					<ul>
+						<li class="fragment">2^8 values: 0-255</li>
+						<li class="fragment">rgb(0, 0, 0) = black</li>
+						<li class="fragment">rgb(255, 255, 255) = white</li>
+						<li class="fragment">rgb(0, 255, 0) = <span class="fragment" style="color: rgb(0, 255, 0)">green</span></li>
+					</ul>
+				</section>
+
+				<section data-auto-animate data-menu-title="HEX Colours">
+					<h2>HEX Colour Codes</h2>
+					<p>HEX colours are RGB colours in the hexadecimal system, they start with a #</p>
+					<pre class="fragment" style="width: 70%; font-size: 3rem; color: #0077CC;">
+0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+					</pre>
+					<ul>
+						<li class="fragment">In the decimal system, digits go from 0-9 (10 digits)</li>
+						<li class="fragment">In the hexadecimal system, digits go from 0-F (16 digits) </li>
+						<li class="fragment">Digits greater than 9 are symbolized by letters A, B, C, D, E, F</li>
+						<li class="fragment">#FFFFFF stands for rgb(255, 255, 255)</li>
+						<li class="fragment">#00FF00 stands for <span style="color: rgb(0, 255, 0)">green</span></li>
+						<li class="fragment">(FF = 16^1 * 15 + 16^0 * 15 = 240 + 15 = 255)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Let's see if you understood!</h2>
+					<div class="panel" style="width: 50%;">
+						<img src="materials/images/poll_hex_colours_expired.png" alt="poll_hex_colours_expired which colour is #00FFFF">
+					</div>
+				</section>
+
+				<section data-menu-title="Browser Tools">
+					<h2><strong class="highlight">Action!</strong> Let's fix the download button!</h2>
+					<div class="fragment">
+						<p>
+							Access your browser's developer tools now <br>
+							[F12]
+						</p>
+						<p class="fragment">
+							use the inspector to select the download button <br>
+							<span class="fragment">and try to change a CSS style.</span> <span class="fragment">Reloading the page will reset the styles.</span>
+						</p>
+					</div>
+				</section>
+
+				<section data-menu-title="Include CSS">
+					<h2><strong class="highlight">Task:</strong> Incorporate CSS Styles into your Shiny app</h2>
+					<ul>
+						<li class="fragment">Create css file "style.css" in same folder (RStudio: New File → CSS File</li>
+						<li class="fragment">
+							Write the rules you want to apply, using an appropriate selector:
+							<div class="codeblock" style="width: 55%;">
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers>
+										aside .btn {
+											margin: 12px;
+											color: #000000;
+										}
+									</code>
+								</pre>
+							</div>
+						</li>
+						<li class="fragment">
+							Include the css file using includeCSS, like this:
+							<div class="codeblock" style="width: 55%;">
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers>
+										# Check your working directory
+										tags$head(
+											includeCSS('style.css')
+										)
+									</code>
+								</pre>
+							</div>
+						</li>
+						<li class="fragment">
+							Use !important to enforce your CSS rules:
+							<div class="codeblock" style="width: 55%;">
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers="|3">
+										aside .btn {
+											margin: 12px;
+											color: #000000 !important;
+										}
+									</code>
+								</pre>
+							</div>
+						</li>
+					</ul>
+					<p class="fragment">The button is fixed ✓</p>
+				</section>
+
+				<section data-menu-title="Further reading">
+					<h2>Further reading</h2>
+					<div class="card" style="margin: auto;">
+						<ul>
+							<li><a href="https://rstudio.github.io/shinydashboard/structure.html" target="_blank">shinyDashboard</a></li>
+							<li><a href="https://www.w3schools.com/css/default.asp" target="_blank">w3schools: CSS</a></li>
+						</ul>
+						<img src="materials/images/mystical_book.jpg" alt="mystical_book" style="width: 20%; margin: 0;">
+					</div>
+				</section>
+
+				<section>
+					<h2>Questions?</h2>
+				</section>
+
+			</div>
+		</div>
+		<script src="scripts/jquery-3.7.1.min.js"></script>
+		<script src="scripts/revealjs/dist/reveal.js"></script>
+		<script src="scripts/revealjs/plugin/notes/notes.js"></script>
+		<script src="scripts/revealjs/plugin/markdown/markdown.js"></script>
+		<script src="scripts/revealjs/plugin/zoom/zoom.js"></script>
+		<script src="scripts/revealjs/plugin/search/search.js"></script>
+		<script src="scripts/revealjs/plugin/highlight/highlight.js"></script>
+		<script src="scripts/reveal-pointer/pointer.js"></script>
+		<script src="scripts/reveal-menu/menu.js"></script>
+		<script src="scripts/reveal-mermaid/mermaid.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				width: 1920,
+  				height: 1080,
+				controls: true,
+				transition: "none",
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealNotes, RevealZoom, RevealSearch, RevealHighlight, RevealPointer, RevealMenu, RevealMermaid ],
+
+				// Plugin settings
+				pointer: {
+					key: "q", // key to enable pointer, default "q", not case-sensitive
+					color: "#60da77", // color of a cursor, default "red" any valid CSS color
+					opacity: 0.95, // opacity of cursor, default 0.8
+					pointerSize: 14, // pointer size in px, default 12
+					alwaysVisible: false, // should pointer mode be always visible? default "false"
+					tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+				},
+
+				menu: {
+					titleSelector: '',
+					hideMissingTitles: true
+				},
+
+				// Further dependencies
+				dependencies: [
+					// { src: 'scripts/reveal-poll/poll/poll.js', async: true }, POLLS DEACTIVATED AFTER LESSON
+					{ src: "scripts/reveal-countdown/countdown_adj.js" }
+				],
+
+				countdown: { defaultTime: 600, autostart: "no" }
+			});
+		</script>
+	</body>
+</html>
