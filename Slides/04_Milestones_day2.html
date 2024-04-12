@@ -63,10 +63,12 @@
 					<h3>Code from the end of Day 1 (example)</h3>
 					<div class="codeblock" style="width: 75%;">
 						<pre class="r" style="height: 45rem;">
-							<code data-trim data-noescape data-line-numbers="|5-21|6,21|7|8,20|9,16|9-16|17,19|17-19|">
+							<code data-trim data-noescape data-line-numbers="|7-23|8,23|9|10,22|11,18|11-18|19,21|19-21|">
 								library(shiny)
 								library(tidyverse)
 								library(ggbeeswarm)
+
+								data(iris)
 
 								# Define UI
 								ui &lt;- fluidPage(
@@ -89,8 +91,6 @@
 								# Define server logic
 								server &lt;- function(input, output) {
 									violinplot &lt;- reactive({
-										data(iris)
-										
 										ggplot(iris, aes(x=Species, y=Petal.Length)) + 
 											geom_violin(aes(fill=Species)) + 
 											geom_quasirandom(size=input$dotsize) + 
@@ -172,11 +172,13 @@
 					<h3>Solution (example):</h3>
 					<div class="codeblock" style="width: 75%;">
 						<pre class="r" style="height: 45rem;">
-							<code data-trim data-noescape data-line-numbers="|2|7,20|8|9,16|9-16|17,19|17-19|">
+							<code data-trim data-noescape data-line-numbers="|2|9,22|10|11,18|11-18|19,21|19-21|">
 								library(shiny)
 								library(shinydashboard)
 								library(tidyverse)
 								library(ggbeeswarm)
+
+								data(iris)
 								
 								# Define UI
 								ui &lt;- dashboardPage(
@@ -197,8 +199,6 @@
 								# Define server logic
 								server &lt;- function(input, output) {
 									violinplot &lt;- reactive({
-										data(iris)
-										
 										ggplot(iris, aes(x=Species, y=Petal.Length)) + 
 											geom_violin(aes(fill=Species)) + 
 											geom_quasirandom(size=input$dotsize) + 
@@ -232,7 +232,7 @@
 								Check the download button <span class="fragment">- misaligned and wrong colour 😢</span><br>
 								<img src="materials/images/shiny_dashboard_misaligned_downloadbutton.png" alt="shiny_dashboard_misaligned_downloadbutton" width="400">
 							</li>
-							<li class="fragment">→ Go to lecture: <a href="./05_Webdevelopment.html" target="_blank">5 "Webdevelopment"</a></li>
+							<li class="fragment">→ Go to the <a href="./05_Webdevelopment.html" target="_blank">Webdevelopment</a> lecture!</li>
 						</ul>
 					</div>
 				</section>
@@ -527,11 +527,13 @@
 					<h3>Solution (example)</h3>
 					<div class="codeblock" style="width: 75%;">
 						<pre class="r" style="height: 45rem;">
-							<code data-trim data-noescape data-line-numbers="|30|57-59|71-73|39|">
+							<code data-trim data-noescape data-line-numbers="|32|57-59|71-73|41|">
 								library(shiny)
 								library(shinydashboard)
 								library(tidyverse)
 								library(ggbeeswarm)
+
+								data(iris)
 								
 								# Define UI
 								ui &lt;- dashboardPage(
@@ -575,8 +577,6 @@
 								# Define server logic
 								server &lt;- function(input, output) {
 									violinplot &lt;- reactive({
-										data(iris)
-										
 										ggplot(iris, aes(x=Species, y=Petal.Length)) + 
 											geom_violin(aes(fill=Species)) + 
 											geom_point(size=input$dotsize) + 

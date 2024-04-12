@@ -4,6 +4,7 @@ This repository houses the slides and training materials for a two-day R Shiny t
 
 
 **Curriculum:**
+
 Day 1
 - [Lesson 2: Introduction](https://mictes.github.io/Shiny_Tutorial/Slides/01_Introduction.html "Lesson: Introduction")
 - [Lesson 2: ggplot2 recap](https://mictes.github.io/Shiny_Tutorial/Slides/02_ggplot.html)
