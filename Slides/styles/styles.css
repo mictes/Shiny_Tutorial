@@ -1,3 +1,8 @@
+/*
+	mictes
+	2024-04-11
+*/
+
 @keyframes gradient_anim {
 	0% {
 		background-position:  0% 50%;
@@ -67,6 +72,10 @@ ul
 	max-width: 50%;
 	padding-left: 25%;
 	text-align: justify;
+}
+
+.codeblock code {
+	padding: 0 !important;
 }
 
 .codeblock pre.code-wrapper

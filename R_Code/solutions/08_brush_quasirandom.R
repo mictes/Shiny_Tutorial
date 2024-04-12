@@ -3,6 +3,8 @@ library(shinydashboard)
 library(tidyverse)
 library(ggbeeswarm)
 
+data(iris)
+
 # Filters and returns rows from a dataset dset 
 # where the x and y coordinates fall within the boundaries defined by a brush object, 
 # based on data extracted from a specified layer
@@ -18,7 +20,7 @@ ui <- dashboardPage(
     title = "My Shiny App"
   ),
   dashboardSidebar(
-    sliderInput("dotsize", "Dot Size", min=0.1, max=5, value=1, step=0.1),
+    sliderInput("dotsize", label = "Dot Size", min = 0.1, max = 5, value = 1, step = 0.1),
     downloadButton(
       outputId  = 'save_violinplot',
       label     = 'Save plot',
@@ -27,7 +29,7 @@ ui <- dashboardPage(
   ),
   dashboardBody(
     tags$head(
-      includeCSS('04_includeCSS.css')
+      includeCSS('05_includeCSS.css')
     ),
     fluidRow(
       box(
@@ -54,8 +56,6 @@ ui <- dashboardPage(
 # Define server logic
 server <- function(input, output) {
   violinplot <- reactive({
-    data(iris)
-    
     ggplot(iris, aes(x=Species, y=Petal.Length)) + 
       geom_violin(aes(fill=Species)) + 
       geom_quasirandom(size=input$dotsize) + 

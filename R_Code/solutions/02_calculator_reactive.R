@@ -24,22 +24,28 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output) {
-  
-  output$result <- renderText({
+
+  result <- reactive({
+    # Handling division by zero with req()
     if (input$operation == "divide") {
       req(input$num2 != 0)
     }
-    
-    result <- switch(input$operation,
-      "add"      = input$num1 + input$num2,
-      "subtract" = input$num1 - input$num2,
-      "multiply" = input$num1 * input$num2,
-      "divide"   = input$num1 / input$num2
+
+    switch(input$operation,
+       "add"      = input$num1 + input$num2,
+       "subtract" = input$num1 - input$num2,
+       "multiply" = input$num1 * input$num2,
+       "divide"   = input$num1 / input$num2
     )
-    
-    paste("Result:", result)
   })
+
+  print(input$num1)
+  # print(result())
   
+  output$result <- renderText({
+    paste("Result:", result())
+  })
+
 }
 
 # Run the application

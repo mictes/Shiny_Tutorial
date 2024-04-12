@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+	<!--
+		mictes
+		2024-04-06
+
+		https://github.com/mictes
+
+		R Shiny tutorial for the MLS PhD Program, University of Zurich
+	-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>R Shiny :: Milestones Day 1</title>
+
+		<link rel="stylesheet" href="scripts/revealjs/dist/reset.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/reveal.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="scripts/reveal-highlight/arta_adj.css">
+
+		<!-- 3rd party libraries -->
+		<link rel="stylesheet" href="scripts/reveal-poll/poll/poll_adj.css">
+		<link rel="stylesheet" href="scripts/reveal-pointer/pointer.css">
+		<link rel="stylesheet" href="scripts/reveal-menu/menu.css">
+
+		<!-- custom styles -->
+		<link rel="stylesheet" href="styles/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="title" data-menu-title="Milestones">
+					<h1 class="shiny">Interactive Data Visualization with R Shiny for Life Sciences</h1>
+					<h2>Day 1: Coding Studio / Milestones</h2>
+					<strong>Michael Teske &amp; Jonas Schmid, Zurich 11 April 2024</strong>
+				</section>
+
+				<section data-menu-title="Include Plot" data-auto-animate>
+					<h2><strong class="highlight">Task 1:</strong> Simple R Shiny app with your plot</h2>
+					<p>Create a simple R Shiny app that outputs the plot you just created, use the following scaffold:</p>
+					<div class="codeblock" style="width: 75%;" data-id="task1_code">
+						<strong>Shiny app scaffold</strong>
+						<pre class="r" style="height: 46rem;">
+							<code data-trim data-noescape data-line-numbers="|1-3|4-15|8-10|11-13|17-22|19-21|24-25|">
+								library(shiny)
+								# other libraries?
+								# load data
+
+								# Define UI
+								ui &lt;- fluidPage(
+									titlePanel(""),
+									sidebarLayout(
+										sidebarPanel(
+											# input here
+										),
+										mainPanel(
+											# output here (?plotOutput)
+										)
+									)
+								)
+								
+								# Define server logic
+								server &lt;- function(input, output) {
+									output$plot &lt;- renderPlot({
+										# ggplot2
+									})
+								}
+								
+								# Run the application
+								shinyApp(ui = ui, server = server)
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2><strong class="highlight">Task 1:</strong> Simple R Shiny app with your plot</h2>
+					<p>Possible solution:</p>
+					<div class="codeblock" style="width: 75%;" data-id="task1_code">
+						<strong>Shiny app</strong>
+						<pre class="r" style="height: 46rem;">
+							<code data-trim data-noescape data-line-numbers="|1-4|6|15-17|23-28|">
+								library(shiny)
+								library(shiny)
+								library(tidyverse)
+								library(ggbeeswarm)
+
+								data(iris)
+
+								# Define UI
+								ui &lt;- fluidPage(
+									titlePanel(""),
+									sidebarLayout(
+										sidebarPanel(
+											# input here
+										),
+										mainPanel(
+											plotOutput("plot")
+										)
+									)
+								)
+								
+								# Define server logic
+								server &lt;- function(input, output) {
+									output$plot &lt;- renderPlot({
+										ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+											geom_violin(aes(fill=Species)) + 
+											geom_quasirandom() + 
+											geom_boxplot(width=0.1)
+									})
+								}
+								
+								# Run the application
+								shinyApp(ui = ui, server = server)
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-menu-title="Interactive Plot" data-auto-animate>
+					<h2><strong class="highlight">Task 2:</strong> Make the plot interactive</h2>
+					<ul>
+						<li class="fragment">Choose one property of the plot (dot size, alpha, pvalue threshold...) that you want to make interactive</li>
+						<li class="fragment">Add an input-widget of your liking and connect it to the rendering function</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2><strong class="highlight">Task 2:</strong> Make the plot interactive</h2>
+					<p>Possible solution:</p>
+					<div class="codeblock" style="width: 75%;">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers="|2">
+								sliderInput(
+									"dotsize",
+									label = "Dot Size",
+									min   = 0.1,
+									max   = 5,
+									value = 1,
+									step  = 0.1
+								)
+							</code>
+						</pre>
+					</div>
+					<div class="codeblock" style="width: 75%; margin-top: 1rem;">
+						<strong>Server</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers="|4">
+								output$plot &lt;- renderPlot({
+									ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+										geom_violin(aes(fill=Species)) + 
+										geom_quasirandom(size=input$dotsize) + 
+										geom_boxplot(width=0.1)
+								})
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-menu-title="Download Plot" data-auto-animate>
+					<h2><Strong class="highlight">Task 3:</Strong> Save the plot!</h2>
+					<div class="codeblock fragment">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								downloadButton(
+									outputId  = "save_violinplot",
+									label     = "Save plot",
+									icon      = shiny::icon("download")
+								)
+							</code>
+						</pre>
+					</div>
+					<p class="fragment">Hint: make the plot a <span class="highlight">reactive({})</span> to use it twice!</p>
+					<div class="codeblock fragment">
+						<strong>Server</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								output$violinplot &lt;- renderPlot({
+									violinplot()
+								})
+
+								output$save_violinplot &lt;- downloadHandler(
+									filename    = 'plot.pdf',
+									content     = function(file) {
+									ggsave(file, plot=violinplot(), width=297, height=210, unit='mm')
+								}
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2><Strong class="highlight">Task 3:</Strong> Save the plot!</h2>
+					<p>Solution server part</p>
+					<div class="codeblock">
+						<strong>Server</strong>
+						<pre class="r" style="height: 28rem;">
+							<code data-trim data-noescape data-line-numbers="|1-6|9|15|">
+								violinplot &lt;- reactive({
+									ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+										geom_violin(aes(fill=Species)) + 
+										geom_quasirandom(size=input$dotsize) + 
+										geom_boxplot(width=0.1)
+								})
+
+								output$violinplot &lt;- renderPlot({
+									violinplot()
+								})
+
+								output$save_violinplot &lt;- downloadHandler(
+									filename    = 'plot.pdf',
+									content     = function(file) {
+									ggsave(file, plot=violinplot(), width=297, height=210, unit='mm')
+								}
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section>
+					<p>Good job! 👍</p>
+					<h2 class="fragment">Questions?</h2>
+				</section>
+
+			</div>
+		</div>
+		<script src="scripts/jquery-3.7.1.min.js"></script>
+		<!-- <script src="scripts/reveal-poll/poll/poll.js"></script> -->
+		<script src="scripts/revealjs/dist/reveal.js"></script>
+		<script src="scripts/revealjs/plugin/notes/notes.js"></script>
+		<script src="scripts/revealjs/plugin/markdown/markdown.js"></script>
+		<script src="scripts/revealjs/plugin/zoom/zoom.js"></script>
+		<script src="scripts/revealjs/plugin/search/search.js"></script>
+		<script src="scripts/revealjs/plugin/highlight/highlight.js"></script>
+		<script src="scripts/reveal-pointer/pointer.js"></script>
+		<script src="scripts/reveal-menu/menu.js"></script>
+		<script src="scripts/reveal-mermaid/mermaid.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				width: 1920,
+  				height: 1080,
+				controls: true,
+				transition: "none",
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealNotes, RevealZoom, RevealSearch, RevealHighlight, RevealPointer, RevealMenu, RevealMermaid ],
+
+				// Plugin settings
+				pointer: {
+					key: "q", // key to enable pointer, default "q", not case-sensitive
+					color: "#60da77", // color of a cursor, default "red" any valid CSS color
+					opacity: 0.95, // opacity of cursor, default 0.8
+					pointerSize: 14, // pointer size in px, default 12
+					alwaysVisible: false, // should pointer mode be always visible? default "false"
+					tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+				},
+
+				menu: {
+					titleSelector: '',
+					hideMissingTitles: true
+				},
+
+				// Further dependencies
+				dependencies: [
+					// { src: 'scripts/reveal-poll/poll/poll.js', async: true }, POLLS DEACTIVATED AFTER LESSON
+					{ src: "scripts/reveal-countdown/countdown_adj.js" }
+				],
+
+				countdown: { defaultTime: 600, autostart: "no" }
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+	<!--
+		mictes
+		2024-04-10
+
+		https://github.com/mictes
+
+		R Shiny tutorial for the MLS PhD Program, University of Zurich
+	-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>R Shiny :: Milestones Day 2</title>
+
+		<link rel="stylesheet" href="scripts/revealjs/dist/reset.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/reveal.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="scripts/reveal-highlight/arta_adj.css">
+
+		<!-- 3rd party libraries -->
+		<link rel="stylesheet" href="scripts/reveal-poll/poll/poll_adj.css">
+		<link rel="stylesheet" href="scripts/reveal-pointer/pointer.css">
+		<link rel="stylesheet" href="scripts/reveal-menu/menu.css">
+
+		<!-- custom styles -->
+		<link rel="stylesheet" href="styles/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="title" data-menu-title="Milestones">
+					<h1 class="shiny">Interactive Data Visualization with R Shiny for Life Sciences</h1>
+					<h2>Day 2: Milestones</h2>
+					<strong>Michael Teske &amp; Jonas Schmid, Zurich 11 April 2024</strong>
+				</section>
+
+				<section>
+					<h2><a href="materials/TipsTricks_Day1.pdf" target="_blank">Tips &amp; Tricks</a> from Day 1</h2>
+				</section>
+
+				<section data-menu-title="Overview">
+					<h2>Overview</h2>
+					<img src="materials/images/day1_overview_progress.png" alt="Overview_Milestones">
+				</section>
+
+				<section data-menu-title="Shinydashboard" data-auto-animate>
+					<h2>7. shinyDashboard</h2>
+					<h3>Requirements:</h3>
+					<ul>
+						<li class="fragment">shinydashboard package installed</li>
+						<li class="fragment">Your Shiny app code from the end of Day 1 open in R Studio</li>
+						<li class="fragment">Want to start over? Use the solution posted on Slack</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2>7. shinyDashboard</h2>
+					<h3>Code from the end of Day 1 (example)</h3>
+					<div class="codeblock" style="width: 75%;">
+						<pre class="r" style="height: 45rem;">
+							<code data-trim data-noescape data-line-numbers="|5-21|6,21|7|8,20|9,16|9-16|17,19|17-19|">
+								library(shiny)
+								library(tidyverse)
+								library(ggbeeswarm)
+
+								# Define UI
+								ui &lt;- fluidPage(
+									titlePanel("My Shiny App"),
+									sidebarLayout(
+										sidebarPanel(
+											sliderInput("dotsize", "Dot Size", min=0.1, max=5, value=1, step=0.1),
+											downloadButton(
+												outputId  = 'save_violinplot',
+												label     = 'Save plot',
+												icon      = shiny::icon('download')
+											)
+										),
+										mainPanel(
+											plotOutput("plot")
+										)
+									)
+								)
+
+								# Define server logic
+								server &lt;- function(input, output) {
+									violinplot &lt;- reactive({
+										data(iris)
+										
+										ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+											geom_violin(aes(fill=Species)) + 
+											geom_quasirandom(size=input$dotsize) + 
+											geom_boxplot(width=0.1)
+									})
+									
+									output$plot &lt;- renderPlot({
+										violinplot()
+									})
+									
+									output$save_violinplot &lt;- downloadHandler(
+										filename    = 'plot.pdf',
+										content     = function(file) {
+											ggsave(file, plot=violinplot(), width=297, height=210, unit='mm')
+										}
+									)
+								}
+
+								# Run the application
+								shinyApp(ui = ui, server = server)
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>7. shinyDashboard</h2>
+					<div>
+						<div class="fragment panel">
+							<h3>fluidPage</h3>
+							<p>(default)</p>
+							<img src="materials/images/example_k_means.png" alt="fluidPage" height="250">
+							<div class="codeblock">
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers="|1,7|2|3,6|4|5|">
+										ui &lt;- fluidPage(
+											titlePanel("Hello Shiny!"),
+											sidebarLayout(
+												sidebarPanel(…),
+												mainPanel(…)
+											)
+										)
+									</code>
+								</pre>
+							</div>
+						</div>
+						<div class="fragment panel">
+							<h3>shinyDashboard</h3>
+							<p>&nbsp;</p>
+							<img src="materials/images/example_shinyDashboard.png" alt="shinyDashboard" height="250">
+							<div class="codeblock">
+								<pre class="r">
+									<code data-trim data-noescape data-line-numbers="|1|3,7|4|5|6|5-6|">
+										library(shinydashboard)
+
+										ui &lt;- dashboardPage(
+											dashboardHeader(title="..."),
+											dashboardSidebar(...),
+											dashboardBody(...)
+										)
+									</code>
+								</pre>
+							</div>
+						</div>
+					</div>
+					<p class="fragment">
+						<strong class="highlight">Task:</strong> Change the UI to shinyDashboard! 
+						<span class="fragment">
+							<img src="materials/images/red_alarm_clock1.jpg" alt="Time: " style="width: 6rem;">
+							<span data-countdown data-time="300" data-autostart="no">
+								5 min
+							</span>
+						</span>
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2>7. shinyDashboard</h2>
+					<h3>Solution (example):</h3>
+					<div class="codeblock" style="width: 75%;">
+						<pre class="r" style="height: 45rem;">
+							<code data-trim data-noescape data-line-numbers="|2|7,20|8|9,16|9-16|17,19|17-19|">
+								library(shiny)
+								library(shinydashboard)
+								library(tidyverse)
+								library(ggbeeswarm)
+								
+								# Define UI
+								ui &lt;- dashboardPage(
+									dashboardHeader(title = "My Shiny App"),
+										dashboardSidebar(
+											sliderInput("dotsize", "Dot Size", min=0.1, max=5, value=1, step=0.1),
+											downloadButton(
+												outputId  = 'save_violinplot',
+												label     = 'Save plot',
+												icon      = shiny::icon('download')
+											)
+										),
+										dashboardBody(
+											plotOutput("plot")
+										)
+								)
+								
+								# Define server logic
+								server &lt;- function(input, output) {
+									violinplot &lt;- reactive({
+										data(iris)
+										
+										ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+											geom_violin(aes(fill=Species)) + 
+											geom_quasirandom(size=input$dotsize) + 
+											geom_boxplot(width=0.1)
+									})
+									
+									output$plot &lt;- renderPlot({
+										violinplot()
+									})
+									
+									output$save_violinplot &lt;- downloadHandler(
+										filename    = 'plot.pdf',
+										content     = function(file) {
+											ggsave(file, plot=violinplot(), width=297, height=210, unit='mm')
+										})
+								}
+								
+								# Run the application
+								shinyApp(ui = ui, server = server)
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>7. shinyDashboard</h2>
+					<div class="card">
+						<ul>
+							<li class="fragment">Run the app <span class="fragment">- does everything look good?</span></li>
+							<li class="fragment">
+								Check the download button <span class="fragment">- misaligned and wrong colour 😢</span><br>
+								<img src="materials/images/shiny_dashboard_misaligned_downloadbutton.png" alt="shiny_dashboard_misaligned_downloadbutton" width="400">
+							</li>
+							<li class="fragment">→ Go to lecture: <a href="./05_Webdevelopment.html" target="_blank">5 "Webdevelopment"</a></li>
+						</ul>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>7. shinyDashboard</h2>
+					<h3>Refine the layout - rows &amp; boxes</h3>
+					<div class="panel" style="width: 60%;">
+						<ul>
+							<li class="fragment">Shinydashboard utilizes Bootstrap, a CSS framework</li>
+							<li class="fragment">It incorporates a 12-column grid system</li>
+							<li class="fragment">Content is organised into rows and boxes</li>
+							<li class="fragment">Boxes range in width from 1 to 12 columns</li>
+							<li class="fragment">
+								CSS classes with color schemes ("status") named: <br>
+								<span style="color: #28a745;">success</span>, 
+								<span style="color: #007bff;">primary</span>, 
+								<span style="color: #ffc107;">warning</span>, and 
+								<span style="color: #dc3545;">danger</span>.
+							</li>
+						</ul>
+					</div>
+					<div class="panel fragment" style="width: 35%;">
+						<div class="codeblock">
+							<strong>UI</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									fluidRow(
+										box(
+											width       = 12, 
+											status      = 'success', 
+											title       = 'Plot',
+											plotOutput("plot")
+										)
+								</code>
+							</pre>
+						</div>
+					</div>
+					<p class="fragment"><strong class="highlight">Task:</strong> Put your plotOutput inside a fluidRow(box(...))</p>
+					<p class="fragment">
+						<img src="materials/images/red_alarm_clock1.jpg" alt="Time: " style="width: 6rem;">
+						<span data-countdown data-time="600" data-autostart="no">
+							10 min
+						</span>
+					</p>
+				</section>
+
+				<section data-menu-title="Brushes" data-auto-animate>
+					<h2>8. Brushes</h2>
+					<p class="fragment">We can use brushes to place a selection on a plot</p>
+					<div class="panel fragment" style="width: 40%;">
+						<img src="materials/images/plot_brush.png" alt="brush rectangular selection on plot" width="700">
+					</div>
+					<div class="panel" style="width: 40%;" data-id="brush_ui_part">
+						<ul>
+							<li class="fragment">Brushes are defined in the UI...</li>
+							<li class="fragment">
+								...as parameter in plotOutput
+								<div class="codeblock">
+									<pre class="r">
+										<code data-trim data-noescape data-line-numbers="|3">
+											plotOutput(
+												"plot",
+												brush = "plot_brush"
+											)
+										</code>
+									</pre>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>8. Brushes</h2>
+					<p>We can use brushes to place a selection on a plot</p>
+					<div class="panel" style="width: 40%;" data-id="brush_ui_part">
+						<ul>
+							<li>Brushes are defined in the UI...</li>
+							<li>
+								...as parameter in plotOutput
+								<div class="codeblock">
+									<pre class="r">
+										<code data-trim data-noescape data-line-numbers>
+											plotOutput(
+												"plot",
+												brush = "plot_brush"
+											)
+										</code>
+									</pre>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="panel" style="width: 40%;">
+						<ul>
+							<li class="fragment">They have an ID</li>
+							<li class="fragment">
+								and are accessed with input$ID
+								<div class="codeblock">
+									<pre class="r">
+										<code data-trim data-noescape data-line-numbers="|3">
+											# (inside server function)
+											selected  &lt;- reactive({
+												brushedPoints(iris, input$plot_brush)
+											})
+										</code>
+									</pre>
+								</div>
+							</li>
+							<li class="fragment"><span class="highlight">brushedPoints()</span> can be used to retrieve selected dots in the plot</li>
+						</ul>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>8. Brushes</h2>
+					<h3>DataTable Output</h3>
+					<p class="fragment">data.frames, such as the selected dots, can be output using DataTables</p>
+					<div class="codeblock fragment" style="width: 75%;">
+						<strong>Server</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								output$table_selected &lt;- renderDataTable(
+									selected()
+								)
+							</code>
+						</pre>
+					</div>
+					<div class="codeblock fragment" style="width: 75%;">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								dataTableOutput(outputId='table_selected')
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>8. Brushes</h2>
+					<h3>Requirements:</h3>
+					<ul>
+						<li class="fragment">For the moment, please change geom_quasirandom to geom_point!</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h2>8. Brushes</h2>
+					<p><strong class="highlight">Task:</strong> add a brush to your plot and output selected data</p>
+					<div class="panel" style="width: 45%;">
+						<p>Steps:</p>
+						<ul>
+							<li class="fragment">Add a brush to plotOutput</li>
+							<li class="fragment">Retrieve selected dots with <span class="highlight">brushedPoints()</span></li>
+							<li class="fragment">Create an output, using <span class="highlight">renderDataTable({})</span></li>
+							<li class="fragment">Create a new fluidRow in the UI</li>
+							<li class="fragment">Output the DataTable there, using <span class="highlight">dataTableOutput()</span></li>
+							<li class="fragment">Check the IDs of the brush/output</li>
+						</ul>
+						<div style="opacity: 0;" data-id="task_8_timer">
+							<img src="materials/images/red_alarm_clock1.jpg" alt="Time: " style="width: 12rem;">
+							<span>
+								15 min
+							</span>
+						</div>
+					</div>
+					<div class="panel" style="width: 40%;">
+						<p>Code:</p>
+						<div class="codeblock fragment" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# UI
+									plotOutput(
+										"plot",
+										brush = "plot_brush"
+									)
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock fragment" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# Server
+									selected  &lt;- reactive({
+										brushedPoints(iris, input$plot_brush)
+									})
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock fragment" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# Server
+									output$table_selected <- renderDataTable(
+										selected()
+									)
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock fragment" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# UI
+									fluidRow(
+										box(
+											width       = 12, 
+											status      = 'primary', 
+											title       = 'Data',
+											dataTableOutput(outputId='table_selected')
+										)
+									)
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>8. Brushes</h2>
+					<p><strong class="highlight">Task:</strong> add a brush to your plot and output selected data</p>
+					<div class="panel" style="width: 45%;">
+						<p>Steps:</p>
+						<ul>
+							<li>Add a brush to plotOutput</li>
+							<li>Retrieve selected dots with <span class="highlight">brushedPoints()</span></li>
+							<li>Create an output, using <span class="highlight">renderDataTable({})</span></li>
+							<li>Create a new fluidRow in the UI</li>
+							<li>Output the DataTable there, using <span class="highlight">dataTableOutput()</span></li>
+							<li>Check the IDs of the brush/output</li>
+						</ul>
+						<div data-id="task_8_timer">
+							<img src="materials/images/red_alarm_clock1.jpg" alt="Time: " style="width: 12rem;">
+							<span data-countdown data-time="900" data-autostart="no">
+								15 min
+							</span>
+						</div>
+					</div>
+					<div class="panel" style="width: 40%;">
+						<p>Code:</p>
+						<div class="codeblock" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# UI
+									plotOutput(
+										"plot",
+										brush = "plot_brush"
+									)
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# Server
+									selected  &lt;- reactive({
+										brushedPoints(iris, input$plot_brush)
+									})
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# Server
+									output$table_selected <- renderDataTable(
+										selected()
+									)
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock" style="margin: 1rem;">
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# UI
+									fluidRow(
+										box(
+											width       = 12, 
+											status      = 'primary', 
+											title       = 'Data',
+											dataTableOutput(outputId='table_selected')
+										)
+									)
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>8. Brushes</h2>
+					<h3>Solution (example)</h3>
+					<div class="codeblock" style="width: 75%;">
+						<pre class="r" style="height: 45rem;">
+							<code data-trim data-noescape data-line-numbers="|30|57-59|71-73|39|">
+								library(shiny)
+								library(shinydashboard)
+								library(tidyverse)
+								library(ggbeeswarm)
+								
+								# Define UI
+								ui &lt;- dashboardPage(
+									dashboardHeader(
+										title = "My Shiny App"
+									),
+									dashboardSidebar(
+										sliderInput("dotsize", "Dot Size", min=0.1, max=5, value=1, step=0.1),
+										downloadButton(
+											outputId  = 'save_violinplot',
+											label     = 'Save plot',
+											icon      = shiny::icon('download')
+										)
+									),
+									dashboardBody(
+										tags$head(
+											includeCSS('04_includeCSS.css')
+										),
+										fluidRow(
+											box(
+												width       = 12, 
+												status      = 'success', 
+												title       = 'Plot',
+												plotOutput(
+													"plot",
+													brush = "plot_brush"
+												)
+											),
+										),
+										fluidRow(
+											box(
+												width       = 12, 
+												status      = 'primary', 
+												title       = 'Data',
+												dataTableOutput(outputId='table_selected')
+											)
+										)
+									)
+								)
+								
+								# Define server logic
+								server &lt;- function(input, output) {
+									violinplot &lt;- reactive({
+										data(iris)
+										
+										ggplot(iris, aes(x=Species, y=Petal.Length)) + 
+											geom_violin(aes(fill=Species)) + 
+											geom_point(size=input$dotsize) + 
+											geom_boxplot(width=0.1) +
+											theme(aspect.ratio=3/4)
+									})
+								
+									selected  &lt;- reactive({
+										brushedPoints(iris, input$plot_brush)
+									})
+									
+									output$plot &lt;- renderPlot({
+										violinplot()
+									})
+									
+									output$save_violinplot &lt;- downloadHandler(
+										filename    = 'plot.pdf',
+										content     = function(file) {
+											ggsave(file, plot=violinplot(), width=297, height=210, unit='mm')
+										})
+								
+									output$table_selected &lt;- renderDataTable(
+										selected()
+									)
+								}
+								
+								# Run the application
+								shinyApp(ui = ui, server = server)
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>8. Brushes - Extended</h2>
+					<p class="fragment">Let's add back geom_quasirandom (replace geom_point) <span class="fragment">- does the brush still work as expected?</span></p>
+					<ul>
+						<li class="fragment">geom_quasirandom scatters the points on the x-axis and changes their value in the plot</li>
+						<li class="fragment"><span class="highlight">brushedPoints()</span> still searches for the original values (which is a good thing)</li>
+						<li class="fragment">Use the following function to retrieve the original values through the scattered values from the plot</li>
+					</ul>
+					<div class="codeblock fragment">
+						<strong>"Outside"</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								# Filters and returns rows from a dataset dset 
+								# where the x and y coordinates fall within the boundaries defined by a brush object, 
+								# based on data extracted from a specified layer
+								find_dots &lt;- function(dset, plot, layer, brush) {
+									tmp &lt;- layer_data(plot, layer)
+									idx &lt;- tmp$x &gt;= brush$xmin & tmp$x &lt;= brush$xmax & tmp$y &gt;= brush$ymin & tmp$y &lt;= brush$ymax
+									return(dset[idx, ])
+								}
+							</code>
+						</pre>
+					</div>
+					<span>&nbsp;</span>
+					<div class="codeblock fragment">
+						<strong>Server</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								# Replace brushedPoints()
+								# Reactively identify the dots selected in the plot using the brush.
+								# 2 corresponds to the layer of the geom_quasirandom function
+								selected  &lt;- reactive({
+									req(input$plot_brush)
+									find_dots(data_subset(), violinplot(), 2, input$plot_brush)
+								})
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-menu-title="Zoom-in" data-auto-animate>
+					<h2>9. Brush-based Zoom-in</h2>
+					<ul>
+						<li class="fragment" data-index="1">We can also use the coordinates from the brush to zoom-in into our plots with a little trick:</li>
+						<li class="fragment" data-index="2">We simply limit the coordinates of our plots to the values from the brush</li>
+						<li class="fragment" data-index="3">And we can do this when double-clicking on the plot</li>
+					</ul>
+					<div class="codeblock panel fragment" data-index="2" style="width: 55%;">
+						<strong>Server</strong>
+						<pre class="r" style="height: 37rem;">
+							<code data-trim data-noescape data-line-numbers="|19|2-12|6-7|">
+								# Initialize zoom (NULL = no-zoom)
+								zoom  &lt;- reactiveValues(x = NULL, y = NULL)
+
+								observeEvent(input$plot_dblclick, {
+									if (!is.null(input$plot_brush)) {
+										zoom$x &lt;- c(input$plot_brush$xmin, input$plot_brush$xmax)
+										zoom$y &lt;- c(input$plot_brush$ymin, input$plot_brush$ymax)
+									} else {
+										zoom$x &lt;- NULL
+										zoom$y &lt;- NULL
+									}
+								})
+
+								violinplot  &lt;- reactive({
+									ggplot(data_subset(), aes(x=Species, y=Petal.Length)) + 
+										geom_violin(aes(fill=Species)) + 
+										geom_quasirandom(size=input$size) + 
+										geom_boxplot(width=0.1) +
+										coord_cartesian(xlim=zoom$x, ylim=zoom$y, expand=T) +
+										theme(aspect.ratio=3/4)
+								})
+							</code>
+						</pre>
+					</div>
+					<div class="panel" data-index="3" style="width: 35%;"">
+						<div class="codeblock">
+							<strong>UI</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers="|3|4-7|6|">
+									plotOutput(
+										outputId  = 'plot',
+										dblclick  = 'plot_dblclick',
+										brush     = brushOpts(
+											id          = 'plot_brush',
+											resetOnNew  = T
+										)
+									)
+								</code>
+							</pre>
+						</div>
+						<ul style="font-size: 1.5rem; padding-top: 1.5rem;">
+							<li class="fragment">Using <span class="highlight">observeEvent()</span> on the server, we watch for the dblclick event from <span class="highlight">plotOutput()</span></li>
+							<li class="fragment">In addition, we change the brush definition, so we can set <span class="highlight">resetOnNew</span> to TRUE</li>
+							<li class="fragment">The latter removes the brush whenever the plot is redrawn, making zooming-out on double-click more convenient</li>
+							<li class="fragment">If there is no brush when a double-click event happens on the plot, zoom becomes NULL and the coordinates of the plot are reset</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<p>Good job! 👍</p>
+					<h2 class="fragment">Questions?</h2>
+				</section>
+
+			</div>
+		</div>
+		<script src="scripts/jquery-3.7.1.min.js"></script>
+		<!-- <script src="scripts/reveal-poll/poll/poll.js"></script> -->
+		<script src="scripts/revealjs/dist/reveal.js"></script>
+		<script src="scripts/revealjs/plugin/notes/notes.js"></script>
+		<script src="scripts/revealjs/plugin/markdown/markdown.js"></script>
+		<script src="scripts/revealjs/plugin/zoom/zoom.js"></script>
+		<script src="scripts/revealjs/plugin/search/search.js"></script>
+		<script src="scripts/revealjs/plugin/highlight/highlight.js"></script>
+		<script src="scripts/reveal-pointer/pointer.js"></script>
+		<script src="scripts/reveal-menu/menu.js"></script>
+		<script src="scripts/reveal-mermaid/mermaid.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				width: 1920,
+  				height: 1080,
+				controls: true,
+				transition: "none",
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealNotes, RevealZoom, RevealSearch, RevealHighlight, RevealPointer, RevealMenu, RevealMermaid ],
+
+				// Plugin settings
+				pointer: {
+					key: "q", // key to enable pointer, default "q", not case-sensitive
+					color: "#60da77", // color of a cursor, default "red" any valid CSS color
+					opacity: 0.95, // opacity of cursor, default 0.8
+					pointerSize: 14, // pointer size in px, default 12
+					alwaysVisible: false, // should pointer mode be always visible? default "false"
+					tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+				},
+
+				menu: {
+					titleSelector: '',
+					hideMissingTitles: true
+				},
+
+				// Further dependencies
+				dependencies: [
+					// { src: 'scripts/reveal-poll/poll/poll.js', async: true }, POLLS DEACTIVATED AFTER LESSON
+					{ src: "scripts/reveal-countdown/countdown_adj.js" }
+				],
+
+				countdown: { defaultTime: 600, autostart: "no" }
+			});
+		</script>
+	</body>
+</html>
