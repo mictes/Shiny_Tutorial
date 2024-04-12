@@ -173,8 +173,8 @@
 
 				<section data-menu-title="Subset dataset" data-auto-animate>
 					<h2>Subset dataset</h2>
-					<p>It can be a good idea to subset the dataset, to show only relevant information</p>
-					<p>For example, using the iris dataset, we can select the species that we want to show</p>
+					<p>It can be a good idea to subset the dataset, to show only relevant information.</p>
+					<p>For example, using the iris dataset, we can select the species that we want to show.</p>
 					<p>One way to achieve this is via using <span class="highlight">reactive({})</span> together with <span class="highlight">selectInput:</span></p>
 					<div class="panel" style="width: 35%">
 						<img src="materials/images/selectInput_subset.png" alt="selectInput_subset only setosa and versicolor shown on plot">
@@ -217,9 +217,9 @@
 
 				<section data-menu-title="More shinyWidgets" data-auto-animate>
 					<h2>shinyWidgets : Extend widgets available in shiny</h2>
-					<p>We can get more widgets from the <a href="https://shinyapps.dreamrs.fr/shinyWidgets/" target="_blank">shinyWidgets</a> package</p>
-					<p>Let's improve the subsetting by allowing drag and drop ordering of the species, using </p>
-					<p>Or try to add another widget from the package</p>
+					<p>We can get more widgets from the <a href="https://shinyapps.dreamrs.fr/shinyWidgets/" target="_blank">shinyWidgets</a> package!</p>
+					<p>Let's improve the subsetting by allowing drag and drop ordering of the species, using <span class="highlight">select<u>ize</u>Input</span></p>
+					<p>- or try to add another widget from the package</p>
 					<div class="panel" style="width: 35%">
 						<img src="materials/images/selectize_drag_order.png" alt="selectize_drag_order subset with changed order of species">
 					</div>
@@ -313,11 +313,11 @@
 							</code>
 						</pre>
 					</div>
-					<p>Using ID selectors, we can attach help texts to HTML elements in our Shinya App</p>
+					<p>Using ID selectors, we can attach help texts to HTML elements in our Shiny App</p>
 					<p>The help texts are defined in JSON (JavaScript Object Notation) format, like this:</p>
 					<div class="codeblock">
 						<strong>UI</strong>
-						<pre class="r">
+						<pre class="r" style="height: 28rem;">
 							<code data-trim data-noescape data-line-numbers>
 								tags$script("
 									// create an array with objects describing each step in the guided tour 
@@ -342,7 +342,7 @@
 
 				<section data-auto-animate>
 					<h2>Interactive help function</h2>
-					<p>Now let's add an actionButton inside the dashboardSidebar()</p>
+					<p>Now let's add an <span class="highlight">actionButton</span> inside the <span class="highlight">dashboardSidebar()</span></p>
 					<div class="codeblock">
 						<strong>UI</strong>
 						<pre class="r">
