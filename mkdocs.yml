@@ -1,0 +1,52 @@
+site_name: R Shiny Tutorial
+site_url: https://mictes.github.io/Shiny_Tutorial
+theme:
+  name: material
+  logo: fa-vial-solid_white.svg
+  favicon: fa-vial-solid.svg
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - prefer_color_scheme
+    - header.autohide
+    - footer
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: blue
+      accent: teal
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: blue
+      accent: teal
+
+nav:
+  - Overview: index.md
+  - Lectures: lectures.md
+  - Exercises: exercises.md
+  - Resources: resources.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mictes/Shiny_Tutorial
+
+copyright: |
+  &copy; 2024 <a href="https://github.com/mictes" target="_blank">Michael Teske</a>
+
+extra_css:
+  - style.css
