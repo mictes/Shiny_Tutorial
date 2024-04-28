@@ -50,3 +50,8 @@ copyright: |
 
 extra_css:
   - style.css
+
+plugins:
+  - exclude:
+      glob:
+        - 'slides/**/*.md'

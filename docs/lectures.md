@@ -8,9 +8,9 @@ These slides thoroughly introduce fundamental concepts in R Shiny, covering **se
 
 ### Day 1
 
-- <a href="https://mictes.github.io/Shiny_Tutorial/Slides/01_Introduction.html" target="_blank">Lesson 1: Introduction</a>
-- <a href="https://mictes.github.io/Shiny_Tutorial/Slides/02_ggplot.html" target="_blank">Lesson 2: ggplot2 recap</a>
+- <a href="Slides/01_Introduction.html" target="_blank">Lesson 1: Introduction</a>
+- <a href="Slides/02_ggplot.html" target="_blank">Lesson 2: ggplot2 recap</a>
 
 ### Day 2
 
-- <a href="https://mictes.github.io/Shiny_Tutorial/Slides/05_Webdevelopment.html" target="_blank">Lesson 3: Webdevelopment adventure</a>
+- <a href="Slides/05_Webdevelopment.html" target="_blank">Lesson 3: Webdevelopment adventure</a>
