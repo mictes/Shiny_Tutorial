@@ -8,7 +8,7 @@ DESeq2 results of RNA-seq data comparing ETOH- (wild type) and TAM-treated (sene
 
 > Ruhland, M. K. et al. Stromal senescence establishes an immunosuppressive microenvironment that drives tumorigenesis. Nat. Commun. 7:11762 doi: <a href="https://doi.org/10.1038/ncomms11762" target="_blank">10.1038/ncomms11762</a> (2016).
 
-<a href="datasets/Ruhland2016.csv" target="_blank" class="md-button md-button--primary">Ruhland2016.csv</a>
+<a href="../datasets/Ruhland2016.csv" target="_blank" class="md-button md-button--primary">Ruhland2016.csv</a>
 
 
 ## Cheatsheets &amp; Examples
@@ -38,6 +38,6 @@ DESeq2 results of RNA-seq data comparing ETOH- (wild type) and TAM-treated (sene
 
 ## Misc
 
-- <a href="R_code/misc/k_means_reactlog.R" target="_blank">k-means reactlog</a>
+- <a href="../R_code/misc/k_means_reactlog.R" target="_blank">k-means reactlog</a>
 
-- <a href="R_code/misc/TipsTricks_Day1.pdf" target="_blank">Tips &amp; Tricks Day 1</a>
+- <a href="../R_code/misc/TipsTricks_Day1.pdf" target="_blank">Tips &amp; Tricks Day 1</a>

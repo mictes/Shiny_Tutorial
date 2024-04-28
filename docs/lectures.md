@@ -1,6 +1,6 @@
 # Lectures
 
-**Hint**: press `m` to open the menu/table of contents, `f` for fullscreen mode (`Esc` to exit fullscreen) and `Ctrl`/`Option` + click to zoom in. Use `q` for the laser-pointer and `t` for starting countdowns.
+**Hints**: press `m` to open the menu/table of contents, `f` for fullscreen mode (`Esc` to exit fullscreen) and `Ctrl`/`Option` + click to zoom in. Use `q` for the laser-pointer and `t` for starting countdowns.
 
 ## Lesson Slides
 
@@ -8,9 +8,9 @@ These slides thoroughly introduce fundamental concepts in R Shiny, covering **se
 
 ### Day 1
 
-- <a href="Slides/01_Introduction.html" target="_blank">Lesson 1: Introduction</a>
-- <a href="Slides/02_ggplot.html" target="_blank">Lesson 2: ggplot2 recap</a>
+- <a href="../slides/01_Introduction.html" target="_blank">Lesson 1: Introduction</a>
+- <a href="../slides/02_ggplot.html" target="_blank">Lesson 2: ggplot2 recap</a>
 
 ### Day 2
 
-- <a href="Slides/05_Webdevelopment.html" target="_blank">Lesson 3: Webdevelopment adventure</a>
+- <a href="../slides/05_Webdevelopment.html" target="_blank">Lesson 3: Webdevelopment adventure</a>
