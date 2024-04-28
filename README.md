@@ -8,11 +8,11 @@ All materials can be found on the following webpage: [https://mictes.github.io/S
 **Curriculum:**
 
 Day 1
-- [Lesson 1: Introduction](https://mictes.github.io/Shiny_Tutorial/Slides/01_Introduction.html)
-- [Lesson 2: ggplot2 recap](https://mictes.github.io/Shiny_Tutorial/Slides/02_ggplot.html)
-- [Coding Studio day 1](https://mictes.github.io/Shiny_Tutorial/Slides/03_Milestones_day1.html)
+- [Lesson 1: Introduction](https://mictes.github.io/Shiny_Tutorial/slides/01_Introduction.html)
+- [Lesson 2: ggplot2 recap](https://mictes.github.io/Shiny_Tutorial/slides/02_ggplot.html)
+- [Coding Studio day 1](https://mictes.github.io/Shiny_Tutorial/slides/03_Milestones_day1.html)
 
 Day 2
-- [Coding Studio day 2](https://mictes.github.io/Shiny_Tutorial/Slides/04_Milestones_day2.html)
-- [Lesson 3: Webdevelopment adventure](https://mictes.github.io/Shiny_Tutorial/Slides/05_Webdevelopment.html)
-- [Assignment](https://mictes.github.io/Shiny_Tutorial/Slides/06_Milestones_Assignment.html)
+- [Coding Studio day 2](https://mictes.github.io/Shiny_Tutorial/slides/04_Milestones_day2.html)
+- [Lesson 3: Webdevelopment adventure](https://mictes.github.io/Shiny_Tutorial/slides/05_Webdevelopment.html)
+- [Assignment](https://mictes.github.io/Shiny_Tutorial/slides/06_Milestones_Assignment.html)
