@@ -12,7 +12,7 @@ Discover the versatility of R Shiny and explore real-world examples that show ho
 **Site**: Irchel campus (UZH)  
 **Tutors**: Michael Teske & Jonas Schmid, Institute of Experimental Immunology, University of Zurich
 
-1 ECTS point will be awarded upon course completion
+1 ECTS point will be awarded upon course completion.
 
 ## Course outline
 

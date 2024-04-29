@@ -19,6 +19,20 @@ To complete the course, you/your team has to accomplish at least 3 additional mi
 
 - <a href="../slides/06_Milestones_Assignment.html" target="_blank">Assignment</a>
 
+Alongside concise instructions for the tasks below, the slides also provide further information about the assignment and submission process. We will take a brief look at some of these tasks at the end of Day 2. Please feel free to post any questions in the Slack channel at any time.
+
+| Task                                             | Difficulty |
+|--------------------------------------------------|------------|
+| Deploy app online                                | 2          |
+| DataTable extensions (download csv)              | 2          |
+| subset dataset                                   | 2          |
+| shinyWidgets : Extend widgets available in shiny | 2          |
+| Shiny Dashboard layout elements                  | 3          |
+| Add favicon                                      | 1.5        |
+| Interactive help function                        | 3          |
+| Plot statistics                                  | 3          |
+| Password protection with shinyauthr              | 3          |
+
 
 ## Solutions
 
