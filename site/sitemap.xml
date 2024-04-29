@@ -2,22 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mictes.github.io/Shiny_Tutorial/</loc>
-         <lastmod>2024-04-28</lastmod>
+         <lastmod>2024-04-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mictes.github.io/Shiny_Tutorial/example_app/</loc>
+         <lastmod>2024-04-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mictes.github.io/Shiny_Tutorial/exercises/</loc>
-         <lastmod>2024-04-28</lastmod>
+         <lastmod>2024-04-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mictes.github.io/Shiny_Tutorial/lectures/</loc>
-         <lastmod>2024-04-28</lastmod>
+         <lastmod>2024-04-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mictes.github.io/Shiny_Tutorial/resources/</loc>
-         <lastmod>2024-04-28</lastmod>
+         <lastmod>2024-04-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

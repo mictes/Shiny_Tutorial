@@ -39,6 +39,7 @@ nav:
   - Lectures: lectures.md
   - Exercises: exercises.md
   - Resources: resources.md
+  - Example app: example_app.md
 
 extra:
   social:
@@ -52,6 +53,7 @@ extra_css:
   - style.css
 
 plugins:
+  - search
   - exclude:
       glob:
         - 'slides/**/*.md'

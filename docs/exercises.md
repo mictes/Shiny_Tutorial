@@ -6,6 +6,7 @@ These coding studios will guide you through structured tasks in the development 
 
 ### Day 1
 
+- <a href="../R_code/exercises/01_calculator.R" target="_blank">Calculator draft R script</a>
 - <a href="../slides/03_Milestones_day1.html" target="_blank">Coding studio day 1</a>
 
 ### Day 2
