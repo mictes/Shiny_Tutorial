@@ -4,7 +4,7 @@
 
 ### Ruhland et al.,  2016
 
-DESeq2 results of RNA-seq data comparing ETOH- (wild type) and TAM-treated (senescent, conditionally overexpressed cell cycle inhibitor p27) mouse skin fibroblasts. You can use this dataset if you want to create an app with a volcano plot.
+DESeq2 results of RNA-seq data comparing EtOH- (wild type) and TAM-treated (senescent, p27 overexpression) mouse skin fibroblasts. You can use this dataset if you want to create an app with a volcano plot.
 
 > Ruhland, M. K. et al. Stromal senescence establishes an immunosuppressive microenvironment that drives tumorigenesis. Nat. Commun. 7:11762 doi: <a href="https://doi.org/10.1038/ncomms11762" target="_blank">10.1038/ncomms11762</a> (2016).
 
