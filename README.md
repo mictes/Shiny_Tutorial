@@ -5,14 +5,4 @@ This repository houses the slides and training materials for a two-day R Shiny t
 All materials can be found on the following webpage: [https://mictes.github.io/Shiny_Tutorial/](https://mictes.github.io/Shiny_Tutorial/)
 
 
-**Curriculum:**
-
-Day 1
-- [Lesson 1: Introduction](https://mictes.github.io/Shiny_Tutorial/slides/01_Introduction.html)
-- [Lesson 2: ggplot2 recap](https://mictes.github.io/Shiny_Tutorial/slides/02_ggplot.html)
-- [Coding Studio day 1](https://mictes.github.io/Shiny_Tutorial/slides/03_Milestones_day1.html)
-
-Day 2
-- [Coding Studio day 2](https://mictes.github.io/Shiny_Tutorial/slides/04_Milestones_day2.html)
-- [Lesson 3: Webdevelopment adventure](https://mictes.github.io/Shiny_Tutorial/slides/05_Webdevelopment.html)
-- [Assignment](https://mictes.github.io/Shiny_Tutorial/slides/06_Milestones_Assignment.html)
+https://mictes.github.io/Shiny_Tutorial/trailer.mp4
