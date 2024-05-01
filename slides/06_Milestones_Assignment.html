@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+	<!--
+		mictes
+		2024-04-10
+
+		https://github.com/mictes
+
+		R Shiny tutorial for the MLS PhD Program, University of Zurich
+	-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>R Shiny :: Assignment</title>
+
+		<link rel="stylesheet" href="scripts/revealjs/dist/reset.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/reveal.css">
+		<link rel="stylesheet" href="scripts/revealjs/dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="scripts/reveal-highlight/arta_adj.css">
+
+		<!-- 3rd party libraries -->
+		<link rel="stylesheet" href="scripts/reveal-poll/poll/poll_adj.css">
+		<link rel="stylesheet" href="scripts/reveal-pointer/pointer.css">
+		<link rel="stylesheet" href="scripts/reveal-menu/menu.css">
+
+		<!-- custom styles -->
+		<link rel="stylesheet" href="styles/styles.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="title" data-menu-title="Assignment Info">
+					<h1 class="shiny">Interactive Data Visualization with R Shiny for Life Sciences</h1>
+					<h2>Assignment: Milestones</h2>
+					<strong>Michael Teske &amp; Jonas Schmid, Zurich 11 April 2024</strong>
+				</section>
+
+				<section>
+					<h2>Assignment Overview</h2>
+					<div style="width: 85%; margin: auto;">
+						<ul>
+							<li>Complete <strong class="highlight">3+ additional Milestones</strong></li>
+							<li><strong class="highlight">Deadline:</strong> Monday, 22 April 2024, 23:59 CET</li>
+							<li>
+								<strong class="highlight">Submit</strong> your work via Slack <u>→ see next page</u>
+								<img src="materials/images/day2_overview_progress.png" alt="Overview_Milestones">
+							</li>
+							<li>You may start from the Solution of Day 2 (if you feel like it)</li>
+							<li>Choose from given suggestions (for individualists: or complete an equivalent work)</li>
+							<li><u>Group work is possible</u></li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>Assignment Submission</h2>
+					<div style="width: 85%; margin: auto; text-align: left;">
+						<ul>
+							<li>Submit your assignment in the <strong class="highlight">#assignment</strong> Slack channel</li>
+							<li>Adhere to the following <strong class="highlight">format:</strong></li>
+						</ul>
+						<ol>
+							<li>Screenshot</li>
+							<li>Short Description (used data, kinds of plots, functionality of the app)</li>
+							<li>If deployed online: link to the app</li>
+							<li>If groupwork: who contributed what</li>
+							<li>Code of the app (attach app.R file)</li>
+						</ol>
+					</div>
+				</section>
+
+				<section>
+					<h2>Evaluation</h2>
+					<p>Please evaluate the Tutorial (if not done yet)</p>
+					<p>The link to the feedback form can be found on Slack</p>
+				</section>
+
+				<section data-menu-title="Milestones">
+					<h2>Milestones Overview</h2>
+					<p>We suggest below milestones to choose from</p>
+					<p>On the following pages you will find hints on how to complete them</p>
+					<table class="tabular" style="width: 65%">
+						<thead>
+							<tr>
+								<td>Task</td>
+								<td style="width: 150px;">Difficulty</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><a href="#/5">Deploy app online</a></td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td><a href="#/6">DataTable extensions (download csv)</a></td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td><a href="#/7">subset dataset</a></td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td><a href="#/8">shinyWidgets : Extend widgets available in shiny</a></td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td><a href="#/9">Shiny Dashboard layout elements</a></td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td><a href="#/10">Add favicon</a></td>
+								<td>1.5</td>
+							</tr>
+							<tr>
+								<td><a href="#/11">Interactive help function</a></td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td><a href="#/13">Plot statistics</a></td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td><a href="#/14">Password protection with shinyauthr</a></td>
+								<td>3</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section data-menu-title="Deploy app" data-auto-animate>
+					<h2>Deploy app online</h2>
+					<p>Using <a href="https://shinyapps.io" target="_blank">shinyapps.io</a> (free)</p>
+					<p><u>OR</u> install <a href="https://posit.co/download/shiny-server/" target="_blank">shiny-server</a> on a server that is remotely accessible and has port forwarding</p>
+					<ul>
+						<li>Very simple with shinyapps.io</li>
+						<li>Detailed instructions on how to upload your app after login</li>
+						<li>Put your app with all dependencies in a separate folder and deploy it using the rsconnect package</li>
+						<li>Monthly limit for the app runtime with the free plan</li>
+						<li>Suitable for most purposes</li>
+					</ul>
+				</section>
+
+				<section data-menu-title="DT Extensions" data-auto-animate>
+					<h2>DataTable extensions</h2>
+					<p>We can enhance our dataTableOutput with extensions, <br> check: <a href="https://rstudio.github.io/DT/extensions.html" target="_blank">https://rstudio.github.io/DT/extensions.html</a></p>
+					<p>To add a button for downloading displayed data in csv format (e.g. to open in MS Excel), <br> we can add the following code to the <span class="highlight">renderDataTable()</span> function:</p>
+					<div class="codeblock">
+						<strong>Server</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								extensions  = 'Buttons',
+								options     = list(
+									pageLength  = 10,
+									scrollX     = T,
+									pagingType  = 'simple_numbers',
+									dom         = 'Bfrtip', 
+									buttons     = list(
+										list(extend = 'csv', filename = 'selected_dots')
+									) 
+								),
+								rownames = F,
+								server   = F # necessary to download whole table
+							</code>
+						</pre>
+					</div>
+					<p>Pay attention to the fact that some settings are provided inside the options list (!)</p>
+					<p>(note: the dom = 'Bfrtip' part is crucial)</p>
+				</section>
+
+				<section data-menu-title="Subset dataset" data-auto-animate>
+					<h2>Subset dataset</h2>
+					<p>It can be a good idea to subset the dataset, to show only relevant information.</p>
+					<p>For example, using the iris dataset, we can select the species that we want to show.</p>
+					<p>One way to achieve this is via using <span class="highlight">reactive({})</span> together with <span class="highlight">selectInput:</span></p>
+					<div class="panel" style="width: 35%">
+						<img src="materials/images/selectInput_subset.png" alt="selectInput_subset only setosa and versicolor shown on plot">
+					</div>
+					<div class="panel" style="width: 60%">
+						<div class="codeblock">
+							<strong>UI</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									selectInput(
+										'species',
+										label     = 'Species',
+										choices   = levels(iris$Species),
+										selected  = levels(iris$Species),
+										multiple  = T
+									)
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock" style="margin-top: 1rem;">
+							<strong>Server</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									# Subset iris data based on selected species
+									data_subset &lt;- reactive({
+										req(input$species)
+										iris_subset &lt;- filter(iris, Species %in% input$species)
+									})
+
+									# Adjust ggplot to use the subset dataset
+									violinplot  &lt;- reactive({
+										ggplot(data_subset(), aes(x=Species, y=Petal.Length)) + 
+											...
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-menu-title="More shinyWidgets" data-auto-animate>
+					<h2>shinyWidgets : Extend widgets available in shiny</h2>
+					<p>We can get more widgets from the <a href="https://shinyapps.dreamrs.fr/shinyWidgets/" target="_blank">shinyWidgets</a> package!</p>
+					<p>Let's improve the subsetting by allowing drag and drop ordering of the species, using <span class="highlight">select<u>ize</u>Input</span></p>
+					<p>- or try to add another widget from the package</p>
+					<div class="panel" style="width: 35%">
+						<img src="materials/images/selectize_drag_order.png" alt="selectize_drag_order subset with changed order of species">
+					</div>
+					<div class="panel" style="width: 60%">
+						<div class="codeblock">
+							<strong>UI</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									library(shinyWidgets) # capital W
+									...
+									selectizeInput(
+										inputId   = 'species',
+										label     = 'Species',
+										choices   = levels(iris$Species),
+										selected  = levels(iris$Species),
+										multiple  = T,
+										options   = list(
+											plugins   = list('remove_button', 'drag_drop')
+										)
+									)
+								</code>
+							</pre>
+						</div>
+						<div class="codeblock" style="margin-top: 1rem;">
+							<strong>Server</strong>
+							<pre class="r">
+								<code data-trim data-noescape data-line-numbers>
+									data_subset &lt;- reactive({
+									req(input$species)
+										iris_subset         &lt;- filter(iris, Species %in% input$species)
+										# Adjust factor levels to make the plot honour our custom order
+										iris_subset$Species &lt;- factor(iris_subset$Species, levels=input$species)
+										iris_subset         &lt;- iris_subset[order(iris_subset$Species), ]
+									})
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+
+				<section data-menu-title="Dashboard Elements" data-auto-animate>
+					<h2>Shiny Dashboard layout elements</h2>
+					<p>Check the documentation of <a href="https://rstudio.github.io/shinydashboard/structure.html#tabbox" target="_blank">shinydashboard</a></p>
+					<p>Add another element to your UI, e.g. a <span class="highlight">tabBox()</span> (easy) or <span class="highlight">menuItem()</span> (a bit more tricky)</p>
+					<img src="materials/images/shinydashboard_tabboxes.png" alt="shinydashboard_tabboxes">
+				</section>
+				<aside class="footnotes">
+					<p>
+						image from <a href="https://rstudio.github.io/shinydashboard/structure.html#tabbox" target="_blank">https://rstudio.github.io/shinydashboard/structure.html#tabbox</a>
+					</p>
+				</aside>
+
+				<section data-menu-title="Favicon" data-auto-animate>
+					<h2>Add a favicon</h2>
+					<p>Favicons are small icons that a website can display in the tabs of your browser</p>
+					<p>We can add a favicon to our Shiny app like this:</p>
+					<div class="codeblock">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								# Add this to tags$head()
+								tags$link(rel='shortcut icon', href='favicon.png'),
+							</code>
+						</pre>
+					</div>
+					<p>
+						Filepaths can be tricky, another way to include the favicon is by encoding it as a base64 image source <br>
+						using small (!) images and a converter, like <a href="https://www.base64encoder.io/image-to-base64-converter/" target="_blank">https://www.base64encoder.io/image-to-base64-converter/</a>
+					</p>
+					<div class="codeblock">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								# Add this to tags$head()
+								tags$link(rel='shortcut icon', href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAA...'),
+							</code>
+						</pre>
+					</div>
+					<p>If you get an "unexpected symbol" error, try starting the app by pressing the "Run App" button in R Studio.</p>
+				</section>
+
+				<section data-menu-title="Help Button" data-auto-animate>
+					<h2>Interactive help function</h2>
+					<p>By including the <a href="https://introjs.com/" target="_blank">introjs</a> JavaScript library, we can create an attractive help function!</p>
+					<div class="codeblock">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								# Add this at the end inside dashboardBody()
+								includeScript('https://cdn.jsdelivr.net/npm/intro.js@7.2.0/intro.min.js')
+							</code>
+						</pre>
+					</div>
+					<p>Using ID selectors, we can attach help texts to HTML elements in our Shiny App</p>
+					<p>The help texts are defined in JSON (JavaScript Object Notation) format, like this:</p>
+					<div class="codeblock">
+						<strong>UI</strong>
+						<pre class="r" style="height: 28rem;">
+							<code data-trim data-noescape data-line-numbers>
+								tags$script("
+									// create an array with objects describing each step in the guided tour 
+									var Steps = [
+										{
+											element:  '#species-label',
+											intro:    'Select the iris species that you would like to include in the plot. You can drag and drop the items to display the species in the desired order.',
+											position: 'right'
+										},
+										{
+											element:  '#size-label',
+											intro:    'You can adjust the size of the dots in the plot.',
+											position: 'right'
+										}
+										...
+									];
+								")
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Interactive help function</h2>
+					<p>Now let's add an <span class="highlight">actionButton</span> inside the <span class="highlight">dashboardSidebar()</span></p>
+					<div class="codeblock">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								actionButton(
+									inputId   = 'help',
+									label     = 'Help',
+									icon      = shiny::icon('question-circle')
+								)
+							</code>
+						</pre>
+					</div>
+					<p>And extend our JavaScript to call the help function when clicking on the actionButton (check the id!)</p>
+					<div class="codeblock">
+						<strong>UI</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								// Below JSON
+								// initialize an introjs instance          
+								var intro = introJs();
+							  
+								// load data
+								intro.setOptions({steps: Steps});
+							
+								// start intro onclick on help button
+								document.querySelector('#help').addEventListener('click', function(e) {
+									intro.start();
+								});
+							</code>
+						</pre>
+					</div>
+					<p>You can troubleshoot JavaScript errors using your browser's developer tools [F12] <u>console</u></p>
+				</section>
+
+				<section data-menu-title="Plot Statistics" data-auto-animate>
+					<h2>Plot statistics</h2>
+					<p>In ggplot, we can add a statistics layer to a plot:</p>
+					<div class="codeblock">
+						<strong>Server</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								... +
+								stat_compare_means(
+									comparisons = pairwise_comp( unique(data_subset()$Species)),
+									method      = 'wilcox.test',
+									label       = 'p.signif'
+								)
+							</code>
+						</pre>
+					</div>
+					<p>Here we use the <span class="highlight">pairwise_comp</span> function to create a list of comparisons between two neighbouring species</p>
+					<div class="codeblock">
+						<strong>"Outside"</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								pairwise_comp &lt;- function(conditions) {
+									conditions.clean  &lt;- unique(as.character(conditions))
+									comparisons &lt;- combn(conditions.clean, 2, simplify=F)
+									return(comparisons)
+								}
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h2>Plot statistics</h2>
+					<p>To enable dynamic toggling of the statistics layer, <br> add an input widget (e.g. <span class="highlight">checkboxInput()</span>) and change the plot definition:</p>
+					<div class="codeblock">
+						<strong>Server</strong>
+						<pre class="r">
+							<code data-trim data-noescape data-line-numbers>
+								# Instead of returning the plot directly, store it for later modification
+								violinplot  &lt;- reactive({
+									pl  &lt;- ggplot(data_subset(), aes(x=Species, y=Petal.Length)) + 
+										...
+
+									if(input$statistics == T && !is.null(data_subset())) {
+										pl  &lt;- pl +
+											stat_compare_means(
+												...
+											)
+									}
+
+									pl
+								})
+							</code>
+						</pre>
+					</div>
+				</section>
+
+				<section data-menu-title="Login/Password">
+					<h2>Password protection with shinyauthr</h2>
+					Explore the <a href="https://github.com/paulc91/shinyauthr" target="_blank">shinyauthr</a> package and protect your app with a login. <br>
+					This is a slightly more complicated task. Make sure to have a look at this <a href="https://github.com/PaulC91/shinyauthr/blob/master/inst/shiny-examples/shinydashboard/app.R" target="_blank">example</a>.
+					<p>(of note: if you have a server, you could also set up a reverse-proxy with nginx <br> and use .htpasswd basic authentication, but this is not a milestone!)</p>
+				</section>
+
+				<section>
+					<h2>Questions &amp; Feedback</h2>
+					<p>→ Slack</p>
+				</section>
+
+			</div>
+		</div>
+		<script src="scripts/jquery-3.7.1.min.js"></script>
+		<!-- <script src="scripts/reveal-poll/poll/poll.js"></script> -->
+		<script src="scripts/revealjs/dist/reveal.js"></script>
+		<script src="scripts/revealjs/plugin/notes/notes.js"></script>
+		<script src="scripts/revealjs/plugin/markdown/markdown.js"></script>
+		<script src="scripts/revealjs/plugin/zoom/zoom.js"></script>
+		<script src="scripts/revealjs/plugin/search/search.js"></script>
+		<script src="scripts/revealjs/plugin/highlight/highlight.js"></script>
+		<script src="scripts/reveal-pointer/pointer.js"></script>
+		<script src="scripts/reveal-menu/menu.js"></script>
+		<script src="scripts/reveal-mermaid/mermaid.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				width: 1920,
+  				height: 1080,
+				controls: true,
+				transition: "none",
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealNotes, RevealZoom, RevealSearch, RevealHighlight, RevealPointer, RevealMenu, RevealMermaid ],
+
+				// Plugin settings
+				pointer: {
+					key: "q", // key to enable pointer, default "q", not case-sensitive
+					color: "#60da77", // color of a cursor, default "red" any valid CSS color
+					opacity: 0.95, // opacity of cursor, default 0.8
+					pointerSize: 14, // pointer size in px, default 12
+					alwaysVisible: false, // should pointer mode be always visible? default "false"
+					tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+				},
+
+				menu: {
+					titleSelector: '',
+					hideMissingTitles: true
+				},
+
+				// Further dependencies
+				dependencies: [
+					// { src: 'scripts/reveal-poll/poll/poll.js', async: true }, POLLS DEACTIVATED AFTER LESSON
+					{ src: "scripts/reveal-countdown/countdown_adj.js" }
+				],
+
+				countdown: { defaultTime: 600, autostart: "no" }
+			});
+		</script>
+	</body>
+</html>
