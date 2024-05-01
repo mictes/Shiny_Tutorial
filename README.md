@@ -5,4 +5,4 @@ This repository houses the slides and training materials for a two-day R Shiny t
 All materials can be found on the following webpage: [https://mictes.github.io/Shiny_Tutorial/](https://mictes.github.io/Shiny_Tutorial/)
 
 
-https://mictes.github.io/Shiny_Tutorial/trailer.mp4
+https://github.com/mictes/Shiny_Tutorial/assets/6222106/88be3cb1-0bef-4cbd-9010-699773f81788
