@@ -241,7 +241,7 @@ server <- function(input, output, session) {
 
   output$violinplot <- renderPlot({
     violinplot()
-  })
+  }, height=600)
 
   output$save_violinplot <- downloadHandler(
     filename    = 'plot.pdf',

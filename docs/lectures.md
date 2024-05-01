@@ -1,6 +1,6 @@
 # Lectures
 
-**Hints**: press `m` to open the menu/table of contents, `f` for fullscreen mode (`Esc` to exit fullscreen) and `Ctrl`/`Option` + click to zoom in. Use `q` for the laser-pointer and `t` for starting countdowns.
+**Hints**: when opening the slides, press `m` to open the menu/table of contents, `f` for fullscreen mode (`Esc` to exit fullscreen) and `Ctrl`/`Option` + click to zoom in. Use `q` for the laser-pointer and `t` for starting countdowns.
 
 ## Lesson Slides
 
